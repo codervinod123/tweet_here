@@ -1,14 +1,15 @@
 const express=require('express');
 const {PORT}=require('./config/serverConfig')
-const {createConnection}=require('./connection/connection')
+const {createConnection}=require('../src/config/connection');
 
-const {Tweet}=require('./models/tweet');
+const TweetRepository=require('./repository/tweet-repository');
+const tweetRepo=new TweetRepository();
 
 const startServer=()=>{
       const app=express();
       app.listen(PORT,async()=>{
-           await Tweet.insertOne({content:"Hello from Here"});
           createConnection();
+          await tweetRepo.createTweet({content:"Hello from Here #vinod #is #cerating tweet"});
           console.log(`Server has Started on PORT no ${PORT}`);
       })
 }
