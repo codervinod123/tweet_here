@@ -1,16 +1,10 @@
 const Tweet=require('../models/tweet');
-const Hashtag=require('../models/hashtag');
 
 class TweetRepository{
+    
      async createTweet(data){
         try {
-             
-             const content=data.content;
-             let tags=content.match(/#[a-z0-9_]+/g);
-             tags=tags.map((s)=>s.substring(1));
-             await Hashtag.create({content:tags});
-
-             const tweet=await Tweet.create({...data,hashtag:tags});
+             const tweet=await Tweet.create(data);
              return tweet;
         } catch (error) {
              console.log('Error has occured while creating tweet',error);
@@ -27,6 +21,7 @@ class TweetRepository{
              throw {error};
         }
      }
+
 }
 
 module.exports=TweetRepository;
