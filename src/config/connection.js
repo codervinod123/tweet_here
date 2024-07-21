@@ -1,15 +1,14 @@
-const mongoose=require('mongoose');
-const {MONGO_URL}=require('./serverConfig');
+import mongoose from 'mongoose';
+import {MONGO_URL} from "./serverConfig.js";
+
 
 const createConnection=async()=>{
     try {
-        await mongoose.connect(MONGO_URL)
-        .then(() => console.log(`Connected! to the ${MONGO_URL}`));
+        await mongoose.connect('mongodb://localhost:27017/dummy_tweet_here')
+        .then(() => console.log(`Connected! to the database ${MONGO_URL} `));
     } catch (error) {
          console.log('Error has occured',error) 
     }  
 }
 
-module.exports={
-    createConnection
-};
+export default createConnection

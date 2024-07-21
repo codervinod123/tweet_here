@@ -1,6 +1,6 @@
-const Hashtag=require('../models/hashtag');
+import Hashtag from '../models/hashtag.js';
 
-class HashtagRepository{
+export class HashtagRepository{
     
     async create(data){
         try {
@@ -40,7 +40,7 @@ class HashtagRepository{
 
     async findByName(hashtagList){
         try {
-            
+
             const hashtag=await Hashtag.find({
                 hashtag:hashtagList
             });
@@ -52,5 +52,3 @@ class HashtagRepository{
     }
 
 }
-
-module.exports=HashtagRepository

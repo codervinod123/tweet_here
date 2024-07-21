@@ -1,10 +1,6 @@
-const {TweetRepository,HashtagRepository}=require('../repository/index');
+import { TweetRepository , HashtagRepository} from "../repository/index.js";
 
-const Hashtag=require('../models/hashtag');
-const Tweet = require('../models/tweet');
-
-
-class TweetService{
+export class TweetService{
 
     constructor(){
         this.tweetRepository=new TweetRepository();
@@ -13,6 +9,7 @@ class TweetService{
       
     async createTweet(data){
         try {
+            console.log("Running the services")
 
              const content=data.content;
              let tags=content.match(/#[a-z0-9_]+/g);
@@ -30,7 +27,7 @@ class TweetService{
              const response=await this.hashtagRepository.createBulk(newTags);
              alreadyPresentTag.map((item)=>{
                   item.tweets.push(tweet.id);
-                  item.save();
+                  item.save(); 
              })
             //  if(tags){
             //     tags=tags.map((s)=>s.substring(1));
@@ -52,4 +49,3 @@ class TweetService{
 
 }
 
-module.exports=TweetService
