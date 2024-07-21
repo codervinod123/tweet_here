@@ -1,4 +1,4 @@
-import Tweet from "../models/tweet.js";
+import Tweet from "../models/tweet-model.js";
 
 export class TweetRepository{
     
