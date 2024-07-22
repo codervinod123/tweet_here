@@ -23,6 +23,8 @@ export class LikeService{
          if(isExist){
              await likable.likes.pull(isExist.id); 
              likable.save();
+             await this.likeRepository.destroy(isExist.id);
+             
          }else {
             const newLike=await this.likeRepository.create({
                 onModel:modelName,
@@ -35,7 +37,7 @@ export class LikeService{
 
 
         } catch (error) {
-            console.log('Error occured');
+            console.log('Error occured Hua hai',error);
         }
            
     }

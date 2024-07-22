@@ -23,5 +23,14 @@ export class LikeRepository{
               console.log('Error has occured while getting like',error);
         }
      }
+
+     async destroy(likeId){
+          try {
+              const response=await Like.findByIdAndDelete(likeId); 
+              return response;
+          } catch (error) {
+             console.log('Error has occured while getting like',error);
+          }
+     }
 }
 

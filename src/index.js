@@ -27,7 +27,7 @@ const startServer=()=>{
 
            await createConnection();
            console.log(`Server has Started on PORT no ${PORT}`);
-           await likeService.toggleModel('Tweet','669ce304c662e7a7713278b3','669ce68cc0a7ec17dbb65a20');
+           await likeService.toggleModel('Tweet','669cc8e0edcb2c88e054ede8','669ce68cc0a7ec17dbb65a20');
            //await tweetService.createTweet({content:"Hello #life is very #jaymasamay jayshreeram hard to some people #dayofcode #hustle #daysofbuilding"});
           
       })
