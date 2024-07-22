@@ -33,7 +33,8 @@ const startServer=()=>{
             app.use('/api',router);
            await createConnection();
            console.log(`Server has Started on PORT no ${PORT}`);
-
+// await userRepository.create({email:'vinodpvp93@gmail.com',password:'vinod@123',name:'Vinod'});
+          
       //      await commentService.toggleModel('Comment','669deb08b391d86da4a0ad1e','669ce4bd76fcd3075adf136d','This is testing comment on comment 6');
       //      await likeService.toggleModel('Tweet','669cc8e0edcb2c88e054ede8','669ce68cc0a7ec17dbb65a20');
       //      await tweetService.createTweet({content:"Hello #life is very #jaymasamay jayshreeram hard to some people #dayofcode #hustle #daysofbuilding"});
