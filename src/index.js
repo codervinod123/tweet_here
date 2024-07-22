@@ -9,6 +9,8 @@ import { LikeRepository } from "./repository/like-repository.js";
 import { LikeService } from "./services/like-service.js";
 import { CommentService } from "./services/comment-service.js";
 
+import router from "./routes/index.js";
+
 
 const tweetService=new TweetService();
 const userRepository=new UserRepository();
@@ -27,7 +29,8 @@ const startServer=()=>{
 
             app.use(bodyParser.json());
             app.use(bodyParser.urlencoded({ extended: true }));
-
+  
+            app.use('/api',router);
            await createConnection();
            console.log(`Server has Started on PORT no ${PORT}`);
 

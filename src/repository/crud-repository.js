@@ -11,7 +11,7 @@ export class CrudRepository{
           return response;
      } catch (error) {
           console.log("Error has occured while creating entry");
-        //   throw {error};
+          throw {error};
      }
     }
 

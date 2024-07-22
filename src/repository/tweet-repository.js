@@ -8,7 +8,7 @@ export class TweetRepository{
              return tweet;
         } catch (error) {
              console.log('Error has occured while creating tweet',error);
-            //  throw {error};
+             throw {error};
         }
      }
 
