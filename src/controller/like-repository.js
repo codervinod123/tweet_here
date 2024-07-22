@@ -7,14 +7,14 @@ const like=async(req,res)=>{
          const response=await likeService.toggleModel(req.query.modelName,req.query.modelId,req.body.userId)
          return res.status(200).json({
             data:response,
-            cuccess:true,
+            scuccess:true,
             error:{},
             Message:"Item Liked Successfully"
         })
     } catch (error) {
         return res.status(500).json({
             data:null,
-            cuccess:false,
+            scuccess:false,
             error:{error},
             Message:"Item can not Like Successfully"
         })

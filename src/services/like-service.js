@@ -11,7 +11,7 @@ export class LikeService{
         
         try {
             if(modelName=='Tweet'){
-                var likable=await this.tweetRepository.readTweet(modelId);
+                var likable=await this.tweetRepository.readEntry(modelId);
             }
         
          const isExist=await this.likeRepository.findUserAndLikeable({
@@ -23,16 +23,19 @@ export class LikeService{
          if(isExist){
              await likable.likes.pull(isExist.id); 
              likable.save();
-             await this.likeRepository.destroy(isExist.id);
-             
+             await this.likeRepository.removeEntry(isExist.id);
+             await isExist.remove();  
+             return false;           
          }else {
-            const newLike=await this.likeRepository.create({
+            const newLike=await this.likeRepository.createEntry({
                 onModel:modelName,
                 likeable:modelId,
                 user:userId,
             })
             await likable.likes.push(newLike);
             likable.save();
+            const like=true;
+            return like;
          }
 
 
