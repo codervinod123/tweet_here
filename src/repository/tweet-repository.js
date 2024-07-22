@@ -1,27 +1,11 @@
 import Tweet from "../models/tweet-model.js";
+import { CrudRepository } from "./crud-repository.js";
 
-export class TweetRepository{
-    
-     async createTweet(data){
-        try {
-             const tweet=await Tweet.create(data);
-             return tweet;
-        } catch (error) {
-             console.log('Error has occured while creating tweet',error);
-             throw {error};
-        }
+
+export class TweetRepository extends CrudRepository{
+    constructor(){
+          super(Tweet);
      }
-
-     async readTweet(tweetId){
-        try {
-             const tweet=await Tweet.findById(tweetId);
-             return tweet;
-        } catch (error) {
-             console.log('Error has occured while creating tweet');
-             throw {error};
-        }
-     }
-
 }
 
 

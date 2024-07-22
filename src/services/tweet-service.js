@@ -9,12 +9,10 @@ export class TweetService{
       
     async createTweet(data){
         try {
-            console.log("Running the services")
-
              const content=data.content;
              let tags=content.match(/#[a-z0-9_]+/g);
              tags=tags.map((tag)=> tag.substring(1));
-             const tweet=await this.tweetRepository.createTweet(data);
+             const tweet=await this.tweetRepository.createEntry(data);
              let alreadyPresentTag=await this.hashtagRepository.findByName(tags)
              let presentTag=alreadyPresentTag.map((tag)=>tag.hashtag)
              
@@ -24,7 +22,7 @@ export class TweetService{
                 return { hashtag:tag ,tweets: [tweet.id] }
              })
 
-             const response=await this.hashtagRepository.createBulk(newTags);
+             await this.hashtagRepository.createBulk(newTags);
              alreadyPresentTag.map((item)=>{
                   item.tweets.push(tweet.id);
                   item.save(); 
@@ -44,6 +42,18 @@ export class TweetService{
 
         } catch (error) {
             console.log('Error has occured while creating tweet',error);
+            throw {error};
+        }
+    }
+
+
+    async readTweet(tweetId){
+        try {
+             const response=await this.tweetRepository.readEntry(tweetId);
+             return response;
+        } catch (error) {
+            console.log('Error has occured while creating tweet',error);
+            throw {error};
         }
     }
 
