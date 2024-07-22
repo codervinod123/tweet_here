@@ -13,7 +13,7 @@ export class CommentService{
     async toggleModel(modelName,modelId,userId,commentItem){
         try {
               if(modelName=='Tweet'){ 
-                 const response=await this.commentRepository.createComment({
+                 const response=await this.commentRepository.createEntry({
                     onModel: modelName,
                     commentable:modelId,
                     comment:commentItem,
