@@ -8,15 +8,5 @@ export class CommentRepository extends CrudRepository{
     constructor(){
         super(Comment);
     }
-      
-    // async createComment(data){
-    //     try {
-    //         const response=await Comment.create(data);
-    //         return response;
-    //     } catch (error) {
-    //         console.log('Error has occured while creating comment');
-    //         throw {error};
-    //     }
-    // }
 
 } 

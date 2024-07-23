@@ -1,3 +1,4 @@
+import Tweet from "../models/tweet-model.js";
 import { TweetRepository , HashtagRepository} from "../repository/index.js";
 
 export class TweetService{
@@ -11,22 +12,24 @@ export class TweetService{
         try {
              const content=data.content;
              let tags=content.match(/#[a-z0-9_]+/g);
-             tags=tags.map((tag)=> tag.substring(1));
              const tweet=await this.tweetRepository.createEntry(data);
-             let alreadyPresentTag=await this.hashtagRepository.findByName(tags)
-             let presentTag=alreadyPresentTag.map((tag)=>tag.hashtag)
              
-             let newTags=tags.filter((tag)=>!presentTag.includes(tag))
+             if(tags){
+                tags=tags.map((tag)=> tag.substring(1));
+                let alreadyPresentTag=await this.hashtagRepository.findByName(tags)
+                let presentTag=alreadyPresentTag.map((tag)=>tag.hashtag)
+                let newTags=tags.filter((tag)=>!presentTag.includes(tag))
              
-            newTags=newTags.map((tag)=>{
-                return { hashtag:tag ,tweets: [tweet.id] }
-             })
+                newTags=newTags.map((tag)=>{
+                  return { hashtag:tag ,tweets: [tweet.id] }
+               })
 
              await this.hashtagRepository.createBulk(newTags);
              alreadyPresentTag.map((item)=>{
                   item.tweets.push(tweet.id);
                   item.save(); 
              })
+             }
             //  if(tags){
             //     tags=tags.map((s)=>s.substring(1));
             
@@ -49,7 +52,8 @@ export class TweetService{
 
     async readTweet(tweetId){
         try {
-             const response=await this.tweetRepository.readEntry(tweetId);
+             const response=await Tweet.findById(tweetId)
+             console.log(response);
              return response;
         } catch (error) {
             console.log('Error has occured while creating tweet',error);
