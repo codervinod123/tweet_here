@@ -18,18 +18,12 @@ const userSchema=new mongoose.Schema({
 },{timestamps:true});
 
 
-const saltRounds = 10;
-const someOtherPlaintextPassword = 'not_bacon';
-
-
 userSchema.pre('save',function(next){
     const user=this;
     const SALT=bcrypt.genSaltSync(10) ;
     const encryptedPass=bcrypt.hashSync(user.password,SALT);
-    console.log(encryptedPass);
     user.password=encryptedPass;
    next();
-
 })
 
 const User=mongoose.model('User',userSchema);
