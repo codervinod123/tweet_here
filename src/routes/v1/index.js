@@ -4,7 +4,7 @@ import createComment from "../../controller/comment-repository.js";
 
 import {createTweet,readTweet} from "../../controller/tweet-controller.js";
 import { createUser,readUser,removeUser } from "../../controller/user-controller.js";
-
+import { searchTrending } from "../../controller/trending-repository.js";
 
 const router=express.Router();
 
@@ -22,5 +22,8 @@ router.post('/comment',createComment)
 router.post('/user',createUser);
 router.get('/user',readUser);
 router.delete('/user',removeUser);
+
+// Endpoints related to search trending posts based upon #tag
+router.get('/trend',searchTrending);
 
 export default router
