@@ -11,6 +11,7 @@ import { CommentService } from "./services/comment-service.js";
 import { TrendingRepository } from "./repository/trening-repository.js";
 
 import router from "./routes/index.js";
+import User from "./models/user-model.js";
 
 
 const tweetService=new TweetService();
@@ -34,8 +35,10 @@ const startServer=()=>{
             app.use('/api',router);
 
            await createConnection();
-
+        
            console.log(`Server has Started on PORT no ${PORT}`);
+      
+           
       })
 }
 

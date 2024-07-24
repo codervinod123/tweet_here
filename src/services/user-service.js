@@ -26,6 +26,38 @@ export class UserService {
        }
     }
 
+    async getByEmail(email){
+        try {
+            const response=await this.userRepository.getByEmail(email);
+            return response;
+       } catch (error) {
+           console.log('Error has occured while fetching User',error);
+           throw {error};
+       }
+    }
+
+    async authenticateUser(email,password){
+        try {
+             const user=await this.getByEmail(email);
+             if(!user){
+                return res.status(500).json({
+                    message:"Cant find",
+                })
+            }
+            if(!user.comparePassword(password)){
+                return res.status(500).json({
+                message:"Password mismatch 78987"
+              })
+            }
+           const token= user.genJWT();
+           return token;
+
+        } catch (error) {
+           console.log('Error has occured while fetching User',error);
+           throw {error};
+        }
+    }
+
     async removeUser(userId){
         try {
             const response=await this.userRepository.removeEntry(userId);
