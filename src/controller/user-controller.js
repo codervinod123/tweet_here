@@ -1,4 +1,3 @@
-import User from "../models/user-model.js";
 import { UserService } from "../services/user-service.js";
 
 
@@ -23,25 +22,6 @@ const createUser=async(req,res)=>{
     }
 }
 
-
-const login=async(req,res)=>{
-   try {
-    const token=await userService.authenticateUser(req.body.email,req.body.password);
-    return res.status(200).json({
-        data:token,
-        message:"Successfully logged in",
-        success:true,
-        error:{}
-    })
-
-
-   } catch (error) {
-    return res.status(200).json({
-        message:"error occured",
-    })
-   }
-
-}
 
 const readUser=async(req,res)=>{
     try {
@@ -82,4 +62,23 @@ const removeUser=async(req,res)=>{
     }
 }
 
-export {createUser,readUser,removeUser,login}
+const loginUser=async(req,res)=>{
+    try {
+        const response=await userService.authenticateUser(req.body);
+        return res.status(200).json({
+            data:response,
+            Message:"User authenticated successfully",
+            scuccess:true,
+            error:{},
+        })
+    } catch (error) {
+        return res.status(500).json({
+            data:response,
+            Message:"User can not authenticated successfully",
+            scuccess:true,
+            error:{},
+        })
+    }
+}
+
+export {createUser,readUser,removeUser,loginUser}

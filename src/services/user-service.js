@@ -36,28 +36,7 @@ export class UserService {
        }
     }
 
-    async authenticateUser(email,password){
-        try {
-             const user=await this.getByEmail(email);
-             if(!user){
-                return res.status(500).json({
-                    message:"Cant find",
-                })
-            }
-            if(!user.comparePassword(password)){
-                return res.status(500).json({
-                message:"Password mismatch 78987"
-              })
-            }
-           const token= user.genJWT();
-           return token;
-
-        } catch (error) {
-           console.log('Error has occured while fetching User',error);
-           throw {error};
-        }
-    }
-
+ 
     async removeUser(userId){
         try {
             const response=await this.userRepository.removeEntry(userId);
@@ -66,6 +45,24 @@ export class UserService {
            console.log('Error has occured while removing User',error);
            throw {error};
        }
+    }
+
+    async authenticateUser(data){
+        try {
+             const user=await this.userRepository.getByEmail(data.email);
+             if(!user){
+                 throw {error:"User is not available in the syatem"};
+             }
+             if(!user.comparePassword(data.password)){
+                throw {error:"Given passwowrd Mismatch"};
+             }
+
+             const token=user.genJWT()
+             return token;
+        } catch (error) {
+            console.log('Error occured during logging into the system');
+            throw {error};
+        }
     }
 
 }

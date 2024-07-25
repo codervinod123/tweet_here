@@ -3,13 +3,16 @@ import like from "../../controller/like-repository.js";
 import createComment from "../../controller/comment-repository.js";
 
 import {createTweet,readTweet} from "../../controller/tweet-controller.js";
-import { createUser,readUser,removeUser,login } from "../../controller/user-controller.js";
+import { createUser,readUser,removeUser,loginUser } from "../../controller/user-controller.js";
 import { searchTrending } from "../../controller/trending-repository.js";
+
+
+import authenticateUser from "../../middlewares/authenticate-middleware.js";
 
 const router=express.Router();
 
 // Endpoints related to Tweets
-router.post('/tweet',createTweet);
+router.post('/tweet', authenticateUser ,createTweet);
 router.get('/tweet',readTweet);
 
 // Endpoints related to Likes
@@ -22,8 +25,7 @@ router.post('/comment',createComment)
 router.post('/user',createUser);
 router.get('/user',readUser);
 router.delete('/user',removeUser);
-
-router.get('/login',login);
+router.post('/login',loginUser);
 
 // Endpoints related to search trending posts based upon #tag
 router.get('/trend',searchTrending);

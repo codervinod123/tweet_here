@@ -12,14 +12,19 @@ const opts={
 
 
 export const passportAuth  = (passport) =>{
-    passport.use(new strategy(opts, async(jwt_payload, done)=> {
-          const user=await User.findOne();
-          if(!user){
-             done(null,false);
-          }
-          if(user){
-            done(null,user);
-          }
-    }))
+    try {
+        passport.use(new strategy(opts, async(jwt_payload, done)=> {
+            const user=await User.findById(jwt_payload.id);
+            if(!user){
+               done(null,false);
+            }
+            if(user){
+              done(null,user);
+            }
+      }))
+    } catch (error) {
+       console.log('Error occured in passport');
+       throw error; 
+    }
 } 
     

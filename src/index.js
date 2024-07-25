@@ -10,6 +10,9 @@ import { LikeService } from "./services/like-service.js";
 import { CommentService } from "./services/comment-service.js";
 import { TrendingRepository } from "./repository/trening-repository.js";
 
+import { passportAuth } from "./config/jwt-auth-config.js";
+import passport from "passport";
+
 import router from "./routes/index.js";
 import User from "./models/user-model.js";
 
@@ -28,7 +31,7 @@ const startServer=()=>{
 
      
 
-      app.listen(3001,async()=>{
+      app.listen(3001,async()=>{           
 
             app.use(bodyParser.json());
             app.use(bodyParser.urlencoded({ extended: true }));
