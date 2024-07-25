@@ -56,9 +56,9 @@ export class UserService {
              if(!user.comparePassword(data.password)){
                 throw {error:"Given passwowrd Mismatch"};
              }
-
              const token=user.genJWT()
-             return token;
+             const isVerified=user.verifyToken(token);
+             return isVerified;
         } catch (error) {
             console.log('Error occured during logging into the system');
             throw {error};

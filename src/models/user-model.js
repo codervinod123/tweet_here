@@ -29,6 +29,14 @@ userSchema.methods.genJWT=function genJwt(){
 }
 
 
+userSchema.methods.verifyToken=function verify(token){
+    const response = jwt.verify(token,'twitter_app');
+    return response;
+}
+
+
+  
+
 userSchema.pre('save',function(next){
     const user=this;
     const SALT=bcrypt.genSaltSync(10) ;

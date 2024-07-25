@@ -73,10 +73,10 @@ const loginUser=async(req,res)=>{
         })
     } catch (error) {
         return res.status(500).json({
-            data:response,
+            data:null,
             Message:"User can not authenticated successfully",
             scuccess:true,
-            error:{},
+            error: error,
         })
     }
 }
