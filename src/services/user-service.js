@@ -58,7 +58,7 @@ export class UserService {
              }
              const token=user.genJWT()
              const isVerified=user.verifyToken(token);
-             return isVerified;
+             return token;
         } catch (error) {
             console.log('Error occured during logging into the system');
             throw {error};

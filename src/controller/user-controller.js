@@ -75,10 +75,29 @@ const loginUser=async(req,res)=>{
         return res.status(500).json({
             data:null,
             Message:"User can not authenticated successfully",
+            scuccess:false,
+            error: error,
+        })
+    }
+}
+
+const getUserByEmail=async(req,res)=>{
+    try {
+        const response=await userService.getByEmail(req.body.email);
+        return res.status(200).json({
+            data:response,
+            Message:"User fetched successfully",
+            scuccess:true,
+            error:{},
+        })
+    } catch (error) {
+        return res.status(500).json({
+            data:null,
+            Message:"User can not getched successfully",
             scuccess:true,
             error: error,
         })
     }
 }
 
-export {createUser,readUser,removeUser,loginUser}
+export {createUser,readUser,removeUser,loginUser,getUserByEmail}
