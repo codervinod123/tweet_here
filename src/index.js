@@ -23,11 +23,12 @@ const startServer=()=>{
 
             app.use(bodyParser.json());
             app.use(bodyParser.urlencoded({ extended: true }));
+           
             app.use('/api',router);
 
-           await createConnection();
+            await createConnection();
         
-           console.log(`Server has Started on PORT no ${PORT}`);
+            console.log(`Server has Started on PORT no ${PORT}`);
            
       })
 }

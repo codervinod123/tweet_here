@@ -27,8 +27,8 @@ export class CrudRepository{
 
        async removeEntry(entryId){
         try {
-             const response=await this.model.findByIdAndDelete(entryId);
-             return response;
+             await this.model.findByIdAndDelete(entryId);
+             return true;
         } catch (error) {
              console.log("Error occured while deleting entry");
              throw {error};

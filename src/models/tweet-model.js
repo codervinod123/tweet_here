@@ -3,8 +3,8 @@ import mongoose from "mongoose";
 const tweetScheme=new mongoose.Schema({
     content:{
         type:String,
-        max:225,
-        required:true
+        required:true,
+        max:[225,"Length Can not be more thn 250 char"]
     },
     likes:[
         {

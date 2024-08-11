@@ -1,68 +1,84 @@
 import { UserRepository } from "../repository/index.js";
 
-export class UserService {
-   
+export class UserService{
+    
     constructor(){
         this.userRepository=new UserRepository();
-    }
+     }
 
     async createUser(data){
         try {
-            const response=await this.userRepository.createEntry(data);
-            return response;
-       } catch (error) {
-           console.log('Error has occured while creating User',error);
-           throw {error};
-       }
+             const response=await this.userRepository.createEntry(data);
+             return response;
+        } catch (error) {
+             console.log("Error has  occured while creating user");
+             throw {error};
+        }
     }
 
     async readUser(userId){
         try {
-            const response=await this.userRepository.readEntry(userId);
-            return response;
-       } catch (error) {
-           console.log('Error has occured while fetching User',error);
-           throw {error};
-       }
-    }
-
-    async getByEmail(email){
-        try {
-            const response=await this.userRepository.getByEmail(email);
-            return response;
-       } catch (error) {
-           console.log('Error has occured while fetching User',error);
-           throw {error};
-       }
-    }
-
- 
-    async removeUser(userId){
-        try {
-            const response=await this.userRepository.removeEntry(userId);
-            return response;
-       } catch (error) {
-           console.log('Error has occured while removing User',error);
-           throw {error};
-       }
-    }
-
-    async authenticateUser(data){
-        try {
-             const user=await this.userRepository.getByEmail(data.email);
-             if(!user){
-                 throw {error:"User is not available in the syatem"};
-             }
-             if(!user.comparePassword(data.password)){
-                throw {error:"Given passwowrd Mismatch"};
-             }
-             const token=user.genJWT()
-             const isVerified=user.verifyToken(token);
-             return token;
+             const response=await this.userRepository.readEntry(userId)
+             return response;
         } catch (error) {
-            console.log('Error occured during logging into the system');
-            throw {error};
+             console.log("Error has  occured while deleting user");
+             throw {error};
         }
     }
 
+    async getByEmail(userEmail){
+        try {
+             const response=await this.userRepository.getByEmail(userEmail);
+             return response;
+        } catch (error) {
+             console.log("Error has  occured while getting user via email");
+             throw {error};
+        }
+    }
+
+    async removeUser(userId){
+        try {
+             await this.userRepository.removeEntry(userId)
+             return true;
+        } catch (error) {
+             console.log("Error has  occured while deleting user");
+             throw {error};
+        }
+    }
+
+
+    async authenticateUser(data){
+        try {
+            
+            // checking a user is present in db or not
+            const user=await this.getByEmail(data.email);
+            if(!user){
+                console.log("Wrong email id");
+                throw {error}; 
+            }
+
+          
+            // is user is present then will check for 
+            if(!user.comparePassword(data.password)){
+                console.log("Password Mismatch");
+                throw {error}; 
+            }
+          
+            const token=user.genJWT()
+            const isVerified=user.verifyToken(token);
+            return isVerified;
+        } catch (error) {
+            console.log("Error has occured while authenticating user");
+            throw {error};
+        }
+    }
+    
+
 }
+
+
+
+
+
+
+

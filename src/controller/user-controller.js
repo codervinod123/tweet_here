@@ -1,6 +1,5 @@
 import { UserService } from "../services/user-service.js";
 
-
 const userService=new UserService();
 
 const createUser=async(req,res)=>{
@@ -74,7 +73,7 @@ const loginUser=async(req,res)=>{
     } catch (error) {
         return res.status(500).json({
             data:null,
-            Message:"User can not authenticated successfully",
+            Message:"User can not authenticated successfully  controller",
             scuccess:false,
             error: error,
         })
@@ -93,7 +92,7 @@ const getUserByEmail=async(req,res)=>{
     } catch (error) {
         return res.status(500).json({
             data:null,
-            Message:"User can not getched successfully",
+            Message:"User can not getched successfully with help of email",
             scuccess:true,
             error: error,
         })

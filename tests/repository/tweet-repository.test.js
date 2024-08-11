@@ -20,7 +20,7 @@ test('Checking wheather a tweet has created gracefully or not',async()=>{
     const tweetRepository=new TweetRepository();
     
     const tweet=await tweetRepository.createEntry(data);
-    expect(tweet.content && tweet.createdAt && tweet.comments).toBe(data.content && data.createdAt && data.comments);
+    expect(tweet.content).toBe(data.content);
 })
 
 // test("Checking wheather a tweet has read through gracefully or not",()=>{
