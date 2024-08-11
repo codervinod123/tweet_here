@@ -4,7 +4,7 @@ import createComment from "../../controller/comment-repository.js";
 
 import {createTweet,readTweet} from "../../controller/tweet-controller.js";
 import { createUser,readUser,removeUser,loginUser,getUserByEmail } from "../../controller/user-controller.js";
-// import { searchTrending } from "../../controller/trending-repository.js";
+import { searchTrending,allTrending } from "../../controller/trending-repository.js";
 
 import authenticateUser from "../../middlewares/authenticate-middleware.js";
 
@@ -31,6 +31,7 @@ router.post('/login/email',getUserByEmail)
 
 
 // Endpoints related to search trending posts based upon #tag
-// router.get('/trend',searchTrending);
+router.get('/trend',searchTrending);
+router.get('/trending',allTrending);
 
 export default router
