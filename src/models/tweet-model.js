@@ -6,6 +6,11 @@ const tweetScheme=new mongoose.Schema({
         required:true,
         max:[225,"Length Can not be more thn 250 char"]
     },
+    media:
+        {
+           type:Array
+        }
+    ,
     likes:[
         {
           type:mongoose.Schema.Types.ObjectId,

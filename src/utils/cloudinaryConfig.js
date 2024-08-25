@@ -1,31 +1,36 @@
 import { v2 as cloudinary } from "cloudinary";
 import fs from "fs";
+import path from "path";
 
 
  cloudinary.config({ 
-    cloud_name: 'di6slwb8k', 
-    api_key: '126556474311653', 
-    api_secret: 'GcNTERmsrEX1w0TL2TJILF2otOk' // Click 'View Credentials' below to copy your API secret
+    cloud_name: 'prajapatiautomobiles', 
+    api_key: '686826227739641', 
+    api_secret: 'oNtMNL6k4XGDOgjO--GLIUuTE3c'
 });
 
 
-const uploadCloudinary=async(localFilePath)=>{
+
+
+const uploadCloudinary=async()=>{
+   console.log("Hello from My side");
+   const localFilePath = path.resolve('src/utils/image.png');
    try {
     // in case if there is no file
      if(!localFilePath){
        return null;
      }
-    //  upload the file on the cloudinary
-     const response=await cloudinary.v2.uploader.upload(
-        localFilePath,
+
+   
+     const response=await cloudinary.uploader.upload(
+      localFilePath,
         {resource_type:"auto"}
      )
-     console.log("File has been uploaded successfully");
+   //   console.log("File has been uploaded successfully",response);
      return response;
 
    } catch (error) {
-        fs.unlinkSync(localFilePath);
-        return null;
+      console.log("Gadbad from another one",error);
    }
 }
 

@@ -12,7 +12,6 @@ import User from "./models/user-model.js";
 import cors from "cors"
 
 
-
 const startServer=()=>{
       const app=express();
  

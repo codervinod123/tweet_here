@@ -8,8 +8,9 @@ export class TweetService{
         this.hashtagRepository=new HashtagRepository();
     }
       
-    async createTweet(data){
+    async createTweet(data,img){
         try {
+    
              const content=data.content;
              let tags=content.match(/#[a-z0-9_]+/g);
              const tweet=await this.tweetRepository.createEntry(data);

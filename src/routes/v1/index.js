@@ -8,6 +8,8 @@ import { searchTrending,allTrending } from "../../controller/trending-repository
 
 import authenticateUser from "../../middlewares/authenticate-middleware.js";
 
+import imageUpload from "../../repository/image-upload-repository.js";
+
 
 
 const router=express.Router();
@@ -33,5 +35,10 @@ router.post('/login/email',getUserByEmail)
 // Endpoints related to search trending posts based upon #tag
 router.get('/trend',searchTrending);
 router.get('/trending',allTrending);
+
+
+// trying to mimic image upload 
+router.post('/image-upload',imageUpload);
+
 
 export default router

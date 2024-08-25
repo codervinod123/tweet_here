@@ -1,9 +1,17 @@
 import { TweetService } from "../services/tweet-service.js";
+import { uploadCloudinary } from "../utils/cloudinaryConfig.js";
 
 const tweetService=new TweetService(); 
 
 const createTweet=async(req,res)=>{
     try {
+        
+
+              
+         const x=await uploadCloudinary();
+         console.log("RES",x.url);
+         req.body={...req.body,media:x.url}
+       
 
         const response=await tweetService.createTweet(req.body);
         return res.status(200).json({
