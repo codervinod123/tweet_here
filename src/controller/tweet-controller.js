@@ -1,18 +1,15 @@
 import { TweetService } from "../services/tweet-service.js";
-import { uploadCloudinary } from "../utils/cloudinaryConfig.js";
+import { uploadOnCloudinart } from "../utils/upload-cloudinary.js";
 
 const tweetService=new TweetService(); 
 
+
+
 const createTweet=async(req,res)=>{
     try {
-        
-
-              
-         const x=await uploadCloudinary();
-         console.log("RES",x.url);
-         req.body={...req.body,media:x.url}
+        const imageURI=await uploadOnCloudinart(req.file.path);
+        req.body={...req.body,media:imageURI.url}
        
-
         const response=await tweetService.createTweet(req.body);
         return res.status(200).json({
             data:response,
@@ -22,6 +19,7 @@ const createTweet=async(req,res)=>{
         })
 
    } catch (error) {
+      console.log(error)
         return res.status(500).json({
             data:{},
             Message:"Tweet can not Created Successfully",

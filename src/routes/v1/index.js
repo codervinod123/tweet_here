@@ -8,14 +8,17 @@ import { searchTrending,allTrending } from "../../controller/trending-repository
 
 import authenticateUser from "../../middlewares/authenticate-middleware.js";
 
-import imageUpload from "../../repository/image-upload-repository.js";
+// import imageUpload from "../../repository/image-upload-repository.js";
 
 
+// multer uploaders
+import { Multerupload } from "../../middlewares/multer-middleware.js";
 
 const router=express.Router();
 
 // Endpoints related to Tweets
-router.post('/tweet', authenticateUser ,createTweet);
+//router.post('/tweet', authenticateUser ,createTweet);
+router.post('/tweet', Multerupload, createTweet);
 router.get('/tweet',readTweet);
 
 // Endpoints related to Likes
@@ -38,7 +41,7 @@ router.get('/trending',allTrending);
 
 
 // trying to mimic image upload 
-router.post('/image-upload',imageUpload);
+// router.post('/image-upload',imageUpload);
 
 
 export default router
