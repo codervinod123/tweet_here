@@ -67,5 +67,16 @@ export class TweetService{
         }
     }
 
+
+    async deleteTweet(tweetId){
+        try {
+             const response=await this.tweetRepository.removeEntry(tweetId)
+             return response;
+        } catch (error) {
+            console.log('Error has occured while deleteing tweet',error);
+            throw {error};
+        }
+    }
+
 }
 

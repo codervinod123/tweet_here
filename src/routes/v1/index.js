@@ -2,7 +2,7 @@ import express from "express";
 import like from "../../controller/like-repository.js";
 import createComment from "../../controller/comment-repository.js";
 
-import {createTweet,readTweet} from "../../controller/tweet-controller.js";
+import {createTweet,readTweet,deleteTweet} from "../../controller/tweet-controller.js";
 import { createUser,readUser,removeUser,loginUser,getUserByEmail } from "../../controller/user-controller.js";
 import { searchTrending,allTrending } from "../../controller/trending-repository.js";
 
@@ -20,6 +20,7 @@ const router=express.Router();
 //router.post('/tweet', authenticateUser ,createTweet);
 router.post('/tweet', Multerupload, createTweet);
 router.get('/tweet',readTweet);
+router.delete('/tweet',deleteTweet);
 
 // Endpoints related to Likes
 router.post('/like',like)
