@@ -1,6 +1,8 @@
 import Tweet from "../models/tweet-model.js";
 import { TweetRepository , HashtagRepository} from "../repository/index.js";
 
+import Like from "../models/like-model.js";
+
 export class TweetService{
 
     constructor(){
@@ -70,8 +72,10 @@ export class TweetService{
 
     async deleteTweet(tweetId){
         try {
-             const response=await this.tweetRepository.removeEntry(tweetId)
-             return response;
+              const likesOfTweet=await Like.deleteMany({likeable:tweetId})
+              console.log(likesOfTweet);
+              const response=await this.tweetRepository.removeEntry(tweetId)
+              return response;
         } catch (error) {
             console.log('Error has occured while deleteing tweet',error);
             throw {error};
