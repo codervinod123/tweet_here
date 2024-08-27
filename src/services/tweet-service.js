@@ -2,6 +2,7 @@ import Tweet from "../models/tweet-model.js";
 import { TweetRepository , HashtagRepository} from "../repository/index.js";
 
 import Like from "../models/like-model.js";
+import Comment from "../models/comment-model.js";
 
 export class TweetService{
 
@@ -69,11 +70,13 @@ export class TweetService{
         }
     }
 
-
     async deleteTweet(tweetId){
         try {
+              // deleting all the likes also from like table when user delete tweet
               const likesOfTweet=await Like.deleteMany({likeable:tweetId})
-              console.log(likesOfTweet);
+              // deleting all the comments also from comment table when user delete tweet
+              const commentsOfTweets=await Comment.deleteMany({commentable:tweetId})
+              // deleting the tweet also from tweet table
               const response=await this.tweetRepository.removeEntry(tweetId)
               return response;
         } catch (error) {
