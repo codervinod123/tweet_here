@@ -23,3 +23,12 @@
 - Authentication
 - Every tweet can have a hashtag
 
+
+// Json Webtoken Basically a key that caims that i'm the authentic user to articipate in a communication 
+Json webtoken has 3 parts (divided through Dot) 
+1- Algorithm that are being used
+2- Determine User info
+3- Signature (Secret Key)
+
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2Y2Q1MmNkNzc0NmVjNmI4MGRmYTA4NCIsImVtYWlsIjoic2Frc2hpQGdtYWlsLmNvbSIsImlhdCI6MTcyNDczNjkzMywiZXhwIjoxNzI0NzQwNTMzfQ.
+8r7nKRcUi0cOnFa0ENE3Y_OV6hnhjKE55cuw1nelWfg

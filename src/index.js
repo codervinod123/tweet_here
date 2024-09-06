@@ -3,11 +3,12 @@ import bodyParser from "body-parser";
 import createConnection from "./config/connection.js";
 import { PORT } from "./config/serverConfig.js";
 
-import { passportAuth } from "./config/jwt-auth-config.js";
-import passport from "passport";
 
 import router from "./routes/index.js";
 import User from "./models/user-model.js";
+
+import passport from "passport";
+import {passportAuth} from "./config/jwt-auth-config.js";
 
 import cors from "cors"
 
@@ -17,6 +18,8 @@ const startServer=()=>{
  
       app.use(cors())
      
+      app.use(passport.initialize());
+      passportAuth(passport);
 
       app.listen(3001,async()=>{           
 

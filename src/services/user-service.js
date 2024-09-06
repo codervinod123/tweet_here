@@ -3,8 +3,8 @@ import { UserRepository } from "../repository/index.js";
 export class UserService{
     
     constructor(){
-        this.userRepository=new UserRepository();
-     }
+       this.userRepository=new UserRepository();
+    }
 
     async createUser(data){
         try {
@@ -46,10 +46,8 @@ export class UserService{
         }
     }
 
-
     async authenticateUser(data){
         try {
-            
             // checking a user is present in db or not
             const user=await this.getByEmail(data.email);
             if(!user){
@@ -66,7 +64,8 @@ export class UserService{
           
             const token=user.genJWT()
             const isVerified=user.verifyToken(token);
-            return isVerified;
+            return token;
+
         } catch (error) {
             console.log("Error has occured while authenticating user");
             throw {error};

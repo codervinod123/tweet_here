@@ -63,6 +63,7 @@ const removeUser=async(req,res)=>{
 
 const loginUser=async(req,res)=>{
     try {
+        console.log(req.body);
         const response=await userService.authenticateUser(req.body);
         return res.status(200).json({
             data:response,

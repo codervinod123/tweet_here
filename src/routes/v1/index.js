@@ -6,19 +6,19 @@ import {createTweet,readTweet,deleteTweet} from "../../controller/tweet-controll
 import { createUser,readUser,removeUser,loginUser,getUserByEmail } from "../../controller/user-controller.js";
 import { searchTrending,allTrending } from "../../controller/trending-repository.js";
 
-import authenticateUser from "../../middlewares/authenticate-middleware.js";
+import {authenticateUser} from "../../middlewares/authenticate-middleware.js"
 
 // import imageUpload from "../../repository/image-upload-repository.js";
 
 
 // multer uploaders
-import { Multerupload } from "../../middlewares/multer-middleware.js";
+import { multerUpload } from "../../middlewares/multer-middleware.js";
 
 const router=express.Router();
 
 // Endpoints related to Tweets
-//router.post('/tweet', authenticateUser ,createTweet);
-router.post('/tweet', Multerupload, createTweet);
+//router.post('/tweet' , authenticateUser , multerUpload , createTweet);
+router.post('/tweet' ,multerUpload, createTweet);
 router.get('/tweet',readTweet);
 router.delete('/tweet',deleteTweet);
 

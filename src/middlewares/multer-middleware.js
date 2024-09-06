@@ -10,7 +10,7 @@ const storage = multer.diskStorage({
     }
 })  // store image in memory
 
-const Multerupload = multer({storage:storage}).single('file');
+const multerUpload = multer({storage:storage}).single('file');
 
 
-export {Multerupload};
+export {multerUpload};
