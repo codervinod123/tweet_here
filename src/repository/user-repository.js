@@ -7,7 +7,7 @@ export class UserRepository extends CrudRepository {
   }
   async getByEmail(email) {
     try {
-      const user = await User.findOne({ email: email })
+      const user = await User.findOne({ email: email });
       return user;
     } catch (error) {
       console.log("Error has occured while finding user");
@@ -15,4 +15,3 @@ export class UserRepository extends CrudRepository {
     }
   }
 }
-

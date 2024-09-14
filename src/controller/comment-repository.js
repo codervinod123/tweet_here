@@ -8,22 +8,22 @@ const createComment = async (req, res) => {
       req.query.modelName,
       req.query.modelId,
       req.body.userId,
-      req.body.commentItem
+      req.body.commentItem,
     );
     return res.status(200).json({
       data: response,
       cuccess: true,
       error: {},
-      Message: "Comment created Successfully"
-    })
+      Message: "Comment created Successfully",
+    });
   } catch (error) {
     return res.status(500).json({
       data: null,
       cuccess: false,
       error: { error },
-      Message: "Comment can not created Successfully"
-    })
+      Message: "Comment can not created Successfully",
+    });
   }
-}
+};
 
 export default createComment;
