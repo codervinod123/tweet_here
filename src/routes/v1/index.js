@@ -6,8 +6,6 @@ import {createTweet,readTweet,deleteTweet} from "../../controller/tweet-controll
 import { createUser,readUser,removeUser,loginUser,getUserByEmail } from "../../controller/user-controller.js";
 import { searchTrending,allTrending } from "../../controller/trending-repository.js";
 
-import {authenticateUser} from "../../middlewares/authenticate-middleware.js"
-
 // import imageUpload from "../../repository/image-upload-repository.js";
 
 
