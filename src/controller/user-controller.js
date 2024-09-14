@@ -3,27 +3,34 @@ import zod from "zod";
 
 const userService = new UserService();
 
+const validateUserInput = (email, password) => {
+  const emailValidation = zod
+    .string()
+    .email({ message: "Invalid email address" });
+  const passValidation = zod.string().min(5, { message: "Weak Password" });
+  const isValidEmail = emailValidation.safeParse(email);
+  const isValidPass = passValidation.safeParse(password);
+
+  if (!isValidEmail.success) {
+    return { isValid: false, message: "Invalid email address" };
+  }
+
+  if (!isValidPass.success) {
+    return { isValid: false, message: "Week Password" };
+  }
+
+  return { isValid: true };
+};
+
 const createUser = async (req, res) => {
   try {
     const { email, password, name } = req.body;
 
-    const emailValidation = zod
-      .string()
-      .email({ message: "Invalid email address" });
-    const passValidation = zod
-      .string()
-      .min(5);
-    const isValidEmail = emailValidation.safeParse(email);
-    const isValidPass = passValidation.safeParse(password);
-    if (!isValidEmail.success) {
-      return res.status(200).json({
-        Message: "Email is invalid",
-      });
-    }
-    
-    if (!isValidPass.success) {
-      return res.status(200).json({
-        Message: "Password is too weak",
+    const validation = validateUserInput(email, password);
+    if (!validation.isValid) {
+      return res.status(403).json({
+        message: validation.message,
+        success: false,
       });
     }
 
