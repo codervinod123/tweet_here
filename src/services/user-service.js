@@ -5,9 +5,13 @@ export class UserService {
     this.userRepository = new UserRepository();
   }
 
-  async createUser(data) {
+  async createUser(email, password, name) {
     try {
-      const response = await this.userRepository.createEntry(data);
+      const response = await this.userRepository.createEntry(
+        email,
+        password,
+        name,
+      );
       return response;
     } catch (error) {
       console.log("Error has  occured while creating user");

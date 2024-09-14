@@ -1,10 +1,33 @@
 import { UserService } from "../services/user-service.js";
+import zod from "zod";
 
 const userService = new UserService();
 
 const createUser = async (req, res) => {
   try {
-    const response = await userService.createUser(req.body);
+    const { email, password, name } = req.body;
+
+    const emailValidation = zod
+      .string()
+      .email({ message: "Invalid email address" });
+    const passValidation = zod
+      .string()
+      .min(5);
+    const isValidEmail = emailValidation.safeParse(email);
+    const isValidPass = passValidation.safeParse(password);
+    if (!isValidEmail.success) {
+      return res.status(200).json({
+        Message: "Email is invalid",
+      });
+    }
+    
+    if (!isValidPass.success) {
+      return res.status(200).json({
+        Message: "Password is too weak",
+      });
+    }
+
+    const response = await userService.createUser(email, password, name);
     return res.status(200).json({
       data: response,
       Message: "User Created Successfully",
