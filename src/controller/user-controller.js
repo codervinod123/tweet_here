@@ -1,40 +1,18 @@
 import { UserService } from "../services/user-service.js";
-import zod from "zod";
+import { uploadOnCloudinary } from "../utils/upload-cloudinary.js";
 
 const userService = new UserService();
 
-const validateUserInput = (email, password) => {
-  const emailValidation = zod
-    .string()
-    .email({ message: "Invalid email address" });
-  const passValidation = zod.string().min(5, { message: "Weak Password" });
-  const isValidEmail = emailValidation.safeParse(email);
-  const isValidPass = passValidation.safeParse(password);
-
-  if (!isValidEmail.success) {
-    return { isValid: false, message: "Invalid email address" };
-  }
-
-  if (!isValidPass.success) {
-    return { isValid: false, message: "Week Password" };
-  }
-
-  return { isValid: true };
-};
-
 const createUser = async (req, res) => {
   try {
-    const { email, password, name } = req.body;
+    const { email, password, name, profilePic } = req.body;
 
-    const validation = validateUserInput(email, password);
-    if (!validation.isValid) {
-      return res.status(403).json({
-        message: validation.message,
-        success: false,
-      });
-    }
-
-    const response = await userService.createUser(email, password, name);
+    const response = await userService.createUser(
+      email,
+      password,
+      name,
+      profilePic,
+    );
     return res.status(200).json({
       data: response,
       Message: "User Created Successfully",
@@ -46,6 +24,31 @@ const createUser = async (req, res) => {
       data: {},
       Message: "User can not Created Successfully",
       cuccess: false,
+      error: { error },
+    });
+  }
+};
+
+const updateProfilePic = async (req, res) => {
+  try {
+    const imageURI = await uploadOnCloudinary(req.file.path);
+    req.body = { ...req.body, profilePic: imageURI.url };
+
+    const response = await userService.updateUserProfilepic(
+      req.body.id,
+      req.body.profilePic,
+    );
+    return res.status(200).json({
+      data: response,
+      Message: "Profilepic updated",
+      scuccess: true,
+      error: {},
+    });
+  } catch (error) {
+    return res.status(500).json({
+      data: {},
+      Message: "Profile Pic can not Update",
+      scuccess: false,
       error: { error },
     });
   }
@@ -92,7 +95,8 @@ const removeUser = async (req, res) => {
 const loginUser = async (req, res) => {
   try {
     console.log(req.body);
-    const response = await userService.authenticateUser(req.body);
+    const { email, password } = req.body;
+    const response = await userService.authenticateUser(email, password);
     return res.status(200).json({
       data: response,
       Message: "User authenticated successfully",
@@ -128,4 +132,11 @@ const getUserByEmail = async (req, res) => {
   }
 };
 
-export { createUser, readUser, removeUser, loginUser, getUserByEmail };
+export {
+  createUser,
+  readUser,
+  removeUser,
+  loginUser,
+  getUserByEmail,
+  updateProfilePic,
+};

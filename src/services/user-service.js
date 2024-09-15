@@ -5,16 +5,26 @@ export class UserService {
     this.userRepository = new UserRepository();
   }
 
-  async createUser(email, password, name) {
+  async createUser(email, password, name, profilePic) {
     try {
-      const response = await this.userRepository.createEntry(
-        email,
-        password,
-        name,
-      );
+      const userData = { email, password, name, profilePic };
+      const response = await this.userRepository.createEntry(userData);
       return response;
     } catch (error) {
       console.log("Error has  occured while creating user");
+      throw { error };
+    }
+  }
+
+  async updateUserProfilepic(userId, profilePic) {
+    try {
+      const response = await this.userRepository.updateProfilePic(
+        userId,
+        profilePic,
+      );
+      return response;
+    } catch (error) {
+      console.log("Error has  occured while updating ProfilePic");
       throw { error };
     }
   }
@@ -49,17 +59,17 @@ export class UserService {
     }
   }
 
-  async authenticateUser(data) {
+  async authenticateUser(email, password) {
     try {
       // checking a user is present in db or not
-      const user = await this.getByEmail(data.email);
+      const user = await this.getByEmail(email);
       if (!user) {
         console.log("Wrong email id");
         throw {};
       }
 
       // is user is present then will check for
-      if (!user.comparePassword(data.password)) {
+      if (!user.comparePassword(password)) {
         console.log("Password Mismatch");
         throw {};
       }

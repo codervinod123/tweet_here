@@ -3,9 +3,9 @@ export class CrudRepository {
     this.model = model;
   }
 
-  async createEntry(email, password, name) {
+  async createEntry(data) {
     try {
-      const response = await this.model.create({ email, password, name });
+      const response = await this.model.create(data);
       return response;
     } catch (error) {
       console.log("Error has occured while creating entry");

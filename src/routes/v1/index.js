@@ -13,6 +13,7 @@ import {
   removeUser,
   loginUser,
   getUserByEmail,
+  updateProfilePic,
 } from "../../controller/user-controller.js";
 import {
   searchTrending,
@@ -23,6 +24,8 @@ import {
 
 // multer uploaders
 import { multerUpload } from "../../middlewares/multer-middleware.js";
+
+import { authValidator } from "../../middlewares/authValidator-middleware.js";
 
 const router = express.Router();
 
@@ -39,11 +42,13 @@ router.post("/like", like);
 router.post("/comment", createComment);
 
 // Endpoints related to User
-router.post("/user", createUser);
+router.post("/user", authValidator, createUser);
 router.get("/user", readUser);
 router.delete("/user", removeUser);
-router.post("/login", loginUser);
+router.post("/login", authValidator, loginUser);
 router.post("/login/email", getUserByEmail);
+
+router.post("/updateProfilepic", multerUpload, updateProfilePic);
 
 // Endpoints related to search trending posts based upon #tag
 router.get("/trend", searchTrending);
