@@ -48,7 +48,7 @@ router.delete("/user", removeUser);
 router.post("/login", authValidator, loginUser);
 router.post("/login/email", getUserByEmail);
 
-router.post("/updateProfilepic", multerUpload, updateProfilePic);
+router.post("/updateprofile", multerUpload, updateProfilePic);
 
 // Endpoints related to search trending posts based upon #tag
 router.get("/trend", searchTrending);
