@@ -13,7 +13,7 @@ export class TweetService {
   async createTweet(data) {
     try {
       const content = data.content;
-      let tags = content.match(/#[a-z0-9_]+/g);
+      let tags = content.match(/#[a-zA-Z0-9_]+/g);
       const tweet = await this.tweetRepository.createEntry(data);
 
       if (tags) {

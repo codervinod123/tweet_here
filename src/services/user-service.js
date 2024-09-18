@@ -16,11 +16,14 @@ export class UserService {
     }
   }
 
-  async updateUserProfilepic(userId, profilePic) {
+  async updateUserProfilepic(userId, profilePic, name, bio, location) {
     try {
       const response = await this.userRepository.updateProfilePic(
         userId,
         profilePic,
+        name,
+        bio,
+        location
       );
       return response;
     } catch (error) {

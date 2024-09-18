@@ -37,6 +37,9 @@ const updateProfilePic = async (req, res) => {
     const response = await userService.updateUserProfilepic(
       req.body.id,
       req.body.profilePic,
+      req.body.name,
+      req.body.bio,
+      req.body.location,
     );
     return res.status(200).json({
       data: response,
@@ -45,6 +48,7 @@ const updateProfilePic = async (req, res) => {
       error: {},
     });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({
       data: {},
       Message: "Profile Pic can not Update jjj",

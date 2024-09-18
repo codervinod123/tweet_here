@@ -16,10 +16,13 @@ export class UserRepository extends CrudRepository {
     }
   }
 
-  async updateProfilePic(userId, profilePic) {
+  async updateProfilePic(userId, profilePic, name, bio, location) {
     try {
       await User.findByIdAndUpdate(userId, {
         profilePic: profilePic,
+        name:name,
+        bio:bio,
+        location:location
       });
       return true;
     } catch (error) {
