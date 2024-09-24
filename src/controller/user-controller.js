@@ -98,11 +98,10 @@ const removeUser = async (req, res) => {
 
 const loginUser = async (req, res) => {
   try {
-    console.log(req.body);
     const { email, password } = req.body;
     const response = await userService.authenticateUser(email, password);
     return res.status(200).json({
-      data: response,
+      token: response,
       Message: "User authenticated successfully",
       scuccess: true,
       error: {},

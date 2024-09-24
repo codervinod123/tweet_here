@@ -26,7 +26,7 @@ const startServer = () => {
 
     await createConnection();
 
-    console.log(`Server has Started on PORT no ${PORT}`);
+    console.log(`Server has Started on PORT No ${PORT}`);
   });
 };
 
