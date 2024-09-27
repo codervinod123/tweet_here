@@ -15,7 +15,6 @@ export class CrudRepository {
 
   async readEntry(entryId) {
     try {
-      console.log(entryId,"dkjsh");
       if(!entryId){
         const response=await this.model.find();
         return response;

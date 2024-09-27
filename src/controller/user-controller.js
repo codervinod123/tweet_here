@@ -31,8 +31,11 @@ const createUser = async (req, res) => {
 
 const updateProfilePic = async (req, res) => {
   try {
-    const imageURI = await uploadOnCloudinary(req.file.path);
+
+    console.log(req.body);
+    const imageURI = await uploadOnCloudinary(req.file.path, "usersProfilePics");
     req.body = { ...req.body, profilePic: imageURI.url };
+    console.log(req.body);
 
     const response = await userService.updateUserProfilepic(
       req.body.id,

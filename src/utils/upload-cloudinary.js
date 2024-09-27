@@ -7,13 +7,13 @@ cloudinary.config({
   api_secret: "oNtMNL6k4XGDOgjO--GLIUuTE3c",
 });
 
-const uploadOnCloudinary = async (localFilePath) => {
+const uploadOnCloudinary = async (localFilePath, usersProfilePics) => {
   try {
     if (!localFilePath) return null;
 
     const response = await cloudinary.uploader.upload(localFilePath, {
       resource_type: "auto",
-      folder: "tweet_here/tweet-media",
+      folder: `tweet_here/${usersProfilePics}`,
     });
     fs.unlinkSync(localFilePath);
     return response;
