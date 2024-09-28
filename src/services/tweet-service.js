@@ -53,7 +53,7 @@ export class TweetService {
   async readTweet(tweetId) {
     try {
       if (!tweetId) {
-        const response = await Tweet.find();
+        const response = await Tweet.find().populate('author').exec();
         // console.log(response);
         return response;
       }
