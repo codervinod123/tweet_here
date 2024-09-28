@@ -9,5 +9,5 @@ export {
   TweetService,
   CommentService,
   LikeService,
-  TrendingService
-}
+  TrendingService,
+};

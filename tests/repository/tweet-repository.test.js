@@ -1,8 +1,8 @@
+import { expect, jest, test } from "@jest/globals";
 import { TweetRepository } from "../../src/repository";
 import Tweet from "../../src/models/tweet-model";
 
 jest.mock("../../src/models/tweet-model");
-
 test("Checking wheather a tweet has created gracefully or not", async () => {
   const data = {
     content: "This is #tag for testing the software",
@@ -12,7 +12,7 @@ test("Checking wheather a tweet has created gracefully or not", async () => {
     updatedAt: "2024-08-06",
   };
 
-  const spy = jest.spyOn(Tweet, "create").mockImplementation(() => {
+  jest.spyOn(Tweet, "create").mockImplementation(() => {
     return data;
   });
 
@@ -21,9 +21,3 @@ test("Checking wheather a tweet has created gracefully or not", async () => {
   const tweet = await tweetRepository.createEntry(data);
   expect(tweet.content).toBe(data.content);
 });
-
-// test("Checking wheather a tweet has read through gracefully or not",()=>{
-//      const data={
-
-//      }
-// })

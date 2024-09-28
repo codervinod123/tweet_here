@@ -36,5 +36,4 @@ export class CommentService {
       console.log("Error has occured", error);
     }
   }
-
 }

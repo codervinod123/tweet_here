@@ -1,3 +1,4 @@
+import { expect, jest, test } from "@jest/globals";
 import { UserRepository } from "../../src/repository/user-repository.js";
 import User from "../../src/models/user-model.js";
 
@@ -12,7 +13,7 @@ test("Testing that a user is gracefully created or not", async () => {
     updatedAt: "2024-08-06",
   };
 
-  const spy = jest.spyOn(User, "create").mockImplementation(() => {
+  jest.spyOn(User, "create").mockImplementation(() => {
     return data;
   });
 

@@ -15,7 +15,6 @@ import {
   allTrending,
 } from "../../controller/index.js";
 
-
 // multer uploaders
 import { multerUpload } from "../../middlewares/multer-middleware.js";
 import { authValidator } from "../../middlewares/authValidator-middleware.js";

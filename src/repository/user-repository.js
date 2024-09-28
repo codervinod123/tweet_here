@@ -1,4 +1,4 @@
-import {User} from "../models/index.js";
+import { User } from "../models/index.js";
 import { CrudRepository } from "./crud-repository.js";
 
 export class UserRepository extends CrudRepository {

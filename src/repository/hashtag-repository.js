@@ -1,4 +1,4 @@
-import {Hashtag} from "../models/index.js";
+import { Hashtag } from "../models/index.js";
 
 export class HashtagRepository {
   async create(data) {

@@ -1,4 +1,4 @@
-import {CommentService} from "../services/index.js";
+import { CommentService } from "../services/index.js";
 
 const commentService = new CommentService();
 
@@ -26,4 +26,4 @@ const createComment = async (req, res) => {
   }
 };
 
-export {createComment};
+export { createComment };

@@ -25,4 +25,4 @@ const like = async (req, res) => {
   }
 };
 
-export {like};
+export { like };
