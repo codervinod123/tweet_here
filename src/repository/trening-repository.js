@@ -1,4 +1,4 @@
-import Hashtag from "../models/hashtag-model.js";
+import {Hashtag} from "../models/index.js";
 
 export class TrendingRepository {
   async searchTrending(trend) {

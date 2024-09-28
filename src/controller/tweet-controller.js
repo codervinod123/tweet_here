@@ -1,4 +1,4 @@
-import { TweetService } from "../services/tweet-service.js";
+import { TweetService } from "../services/index.js";
 import { uploadOnCloudinary } from "../utils/upload-cloudinary.js";
 
 const tweetService = new TweetService();

@@ -1,4 +1,4 @@
-import { TrendingRepository } from "../repository/trening-repository.js";
+import { TrendingRepository } from "../repository/index.js";
 
 export class TrendingService {
   constructor() {

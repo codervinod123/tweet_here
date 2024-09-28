@@ -1,6 +1,6 @@
 import Comment from "../models/comment-model.js";
 import Tweet from "../models/tweet-model.js";
-import { CommentRepository } from "../repository/comment-repository.js";
+import { CommentRepository } from "../repository/index.js";
 
 export class CommentService {
   constructor() {
@@ -36,4 +36,5 @@ export class CommentService {
       console.log("Error has occured", error);
     }
   }
+
 }

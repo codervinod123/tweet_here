@@ -23,7 +23,7 @@ export class UserService {
         profilePic,
         name,
         bio,
-        location
+        location,
       );
       return response;
     } catch (error) {

@@ -1,4 +1,4 @@
-import User from "../models/user-model.js";
+import {User} from "../models/index.js";
 import { CrudRepository } from "./crud-repository.js";
 
 export class UserRepository extends CrudRepository {
@@ -20,9 +20,9 @@ export class UserRepository extends CrudRepository {
     try {
       await User.findByIdAndUpdate(userId, {
         profilePic: profilePic,
-        name:name,
-        bio:bio,
-        location:location
+        name: name,
+        bio: bio,
+        location: location,
       });
       return true;
     } catch (error) {

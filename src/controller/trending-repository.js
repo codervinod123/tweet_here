@@ -1,4 +1,4 @@
-import { TrendingService } from "../services/trending-service.js";
+import { TrendingService } from "../services/index.js";
 
 const trendingService = new TrendingService();
 

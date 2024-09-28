@@ -15,8 +15,8 @@ export class CrudRepository {
 
   async readEntry(entryId) {
     try {
-      if(!entryId){
-        const response=await this.model.find();
+      if (!entryId) {
+        const response = await this.model.find();
         return response;
       }
       const response = await this.model.findById(entryId);

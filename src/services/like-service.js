@@ -1,4 +1,4 @@
-import { LikeRepository, TweetRepository } from "../repository/index.js";
+import { TweetRepository, LikeRepository } from "../repository/index.js";
 
 export class LikeService {
   constructor() {

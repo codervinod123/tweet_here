@@ -1,8 +1,8 @@
 import Tweet from "../models/tweet-model.js";
-import { TweetRepository, HashtagRepository } from "../repository/index.js";
-
 import Like from "../models/like-model.js";
 import Comment from "../models/comment-model.js";
+
+import { TweetRepository, HashtagRepository } from "../repository/index.js";
 
 export class TweetService {
   constructor() {

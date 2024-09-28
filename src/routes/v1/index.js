@@ -1,30 +1,23 @@
 import express from "express";
-import like from "../../controller/like-repository.js";
-import createComment from "../../controller/comment-repository.js";
-
-import {
-  createTweet,
-  readTweet,
-  deleteTweet,
-} from "../../controller/tweet-controller.js";
 import {
   createUser,
+  loginUser,
   readUser,
   removeUser,
-  loginUser,
   getUserByEmail,
   updateProfilePic,
-} from "../../controller/user-controller.js";
-import {
+  createTweet,
+  like,
+  readTweet,
+  deleteTweet,
+  createComment,
   searchTrending,
   allTrending,
-} from "../../controller/trending-repository.js";
+} from "../../controller/index.js";
 
-// import imageUpload from "../../repository/image-upload-repository.js";
 
 // multer uploaders
 import { multerUpload } from "../../middlewares/multer-middleware.js";
-
 import { authValidator } from "../../middlewares/authValidator-middleware.js";
 
 const router = express.Router();

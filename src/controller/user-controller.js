@@ -1,4 +1,4 @@
-import { UserService } from "../services/user-service.js";
+import { UserService } from "../services/index.js";
 import { uploadOnCloudinary } from "../utils/upload-cloudinary.js";
 
 const userService = new UserService();
@@ -31,8 +31,11 @@ const createUser = async (req, res) => {
 
 const updateProfilePic = async (req, res) => {
   try {
-    const imageURI = await uploadOnCloudinary(req.file.path, "usersProfilePics");
-    const imageTransForm=`https://res.cloudinary.com/prajapatiautomobiles/image/upload/c_thumb,g_face,h_200,w_200/r_max/f_auto/v${imageURI.version}/${imageURI.public_id}`
+    const imageURI = await uploadOnCloudinary(
+      req.file.path,
+      "usersProfilePics",
+    );
+    const imageTransForm = `https://res.cloudinary.com/prajapatiautomobiles/image/upload/c_thumb,g_face,h_200,w_200/r_max/f_auto/v${imageURI.version}/${imageURI.public_id}`;
     req.body = { ...req.body, profilePic: imageTransForm };
     const response = await userService.updateUserProfilepic(
       req.body.id,
