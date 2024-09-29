@@ -35,7 +35,6 @@ router.post("/updateprofile", multerUpload, updateProfilePic);
 
 router.post("/follow", follow);
 
-
 // Endpoints related to Tweets
 //router.post('/tweet' , authenticateUser , multerUpload , createTweet);
 router.post("/tweet", multerUpload, createTweet);
@@ -47,7 +46,6 @@ router.post("/like", like);
 
 // Endpoints related to comment
 router.post("/comment", createComment);
-
 
 // Endpoints related to search trending posts based upon #tag
 router.get("/trend", searchTrending);

@@ -10,7 +10,7 @@ const tweetScheme = new mongoose.Schema(
     media: {
       type: Array,
     },
-    author:{
+    author: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },

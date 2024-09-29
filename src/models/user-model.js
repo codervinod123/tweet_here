@@ -26,18 +26,18 @@ const userSchema = new mongoose.Schema(
     location: {
       type: String,
     },
-    followersList:[
+    followersList: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
       },
     ],
-    followingList:[
+    followingList: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
       },
-    ]
+    ],
   },
   { timestamps: true },
 );

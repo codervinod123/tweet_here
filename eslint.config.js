@@ -19,7 +19,7 @@ export default [
       "keyword-spacing": ["error", { before: true, after: true }],
     },
   },
-  
+
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
 ];

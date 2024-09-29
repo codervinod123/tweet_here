@@ -138,9 +138,12 @@ const getUserByEmail = async (req, res) => {
   }
 };
 
-const follow=async(req, res)=>{
+const follow = async (req, res) => {
   try {
-    const response = await userService.follow(req.headers.followerid, req.headers.followingid);
+    const response = await userService.follow(
+      req.headers.followerid,
+      req.headers.followingid,
+    );
     console.log(response);
     return res.status(200).json({
       data: response,
@@ -156,7 +159,7 @@ const follow=async(req, res)=>{
       error: error,
     });
   }
-}
+};
 
 export {
   createUser,

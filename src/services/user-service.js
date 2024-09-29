@@ -86,14 +86,16 @@ export class UserService {
     }
   }
 
-  async follow(followerId, followingId){
+  async follow(followerId, followingId) {
     try {
-      const response= await this.userRepository.follow(followerId, followingId);
+      const response = await this.userRepository.follow(
+        followerId,
+        followingId,
+      );
       return response;
     } catch (error) {
       console.log("Error has  occured while deleting user");
       throw { error };
     }
   }
-
 }
