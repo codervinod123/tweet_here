@@ -132,11 +132,31 @@ const getUserByEmail = async (req, res) => {
     return res.status(500).json({
       data: null,
       Message: "User can not getched successfully with help of email",
-      scuccess: true,
+      scuccess: false,
       error: error,
     });
   }
 };
+
+const follow=async(req, res)=>{
+  try {
+    const response = await userService.follow(req.headers.followerid, req.headers.followingid);
+    console.log(response);
+    return res.status(200).json({
+      data: response,
+      Message: "Followed successfully",
+      scuccess: true,
+      error: {},
+    });
+  } catch (error) {
+    return res.status(500).json({
+      data: null,
+      Message: "Unable to follow",
+      scuccess: false,
+      error: error,
+    });
+  }
+}
 
 export {
   createUser,
@@ -145,4 +165,5 @@ export {
   loginUser,
   getUserByEmail,
   updateProfilePic,
+  follow,
 };

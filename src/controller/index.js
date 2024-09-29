@@ -8,6 +8,7 @@ import {
   loginUser,
   getUserByEmail,
   updateProfilePic,
+  follow,
 } from "./user-controller.js";
 import { createComment } from "./comment-repository.js";
 
@@ -25,4 +26,5 @@ export {
   createComment,
   searchTrending,
   allTrending,
+  follow,
 };

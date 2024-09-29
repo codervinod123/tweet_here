@@ -13,6 +13,7 @@ import {
   createComment,
   searchTrending,
   allTrending,
+  follow,
 } from "../../controller/index.js";
 
 // multer uploaders
@@ -31,6 +32,8 @@ router.get("/user", readUser);
 router.delete("/user", removeUser);
 router.post("/login/email", getUserByEmail);
 router.post("/updateprofile", multerUpload, updateProfilePic);
+
+router.post("/follow", follow);
 
 
 // Endpoints related to Tweets

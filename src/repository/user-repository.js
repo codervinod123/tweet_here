@@ -30,4 +30,21 @@ export class UserRepository extends CrudRepository {
       throw { error };
     }
   }
+
+  async follow(followerId, followingId){
+    try {
+      await User.updateOne(
+        {_id: followerId},
+        {$addToSet: {followingList: followingId}}
+      )
+      await User.updateOne(
+        {_id: followingId},
+        {$addToSet: {followersList: followerId}}
+      )
+    } catch (error) {
+      console.log("Error has occured while finding user");
+      throw { error };
+    }
+  }
+
 }
