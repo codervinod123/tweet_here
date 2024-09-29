@@ -23,7 +23,6 @@ const startServer = () => {
     app.use("/api", router);
 
     await createConnection();
-
     console.log(`Server has Started on PORT No ${PORT}`);
   });
 };
