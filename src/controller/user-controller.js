@@ -140,6 +140,7 @@ const getUserByEmail = async (req, res) => {
 
 const follow = async (req, res) => {
   try {
+    console.log(req.headers.followerid, req.headers.followingid);
     const response = await userService.follow(
       req.headers.followerid,
       req.headers.followingid,
