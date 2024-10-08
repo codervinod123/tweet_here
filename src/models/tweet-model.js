@@ -5,7 +5,7 @@ const tweetScheme = new mongoose.Schema(
     content: {
       type: String,
       required: true,
-      max: [225, "Length Can not be more thn 250 char"],
+      max: [225, "Length Can not be more than 250 char"],
     },
     media: {
       type: Array,

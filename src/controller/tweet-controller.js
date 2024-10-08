@@ -5,8 +5,10 @@ const tweetService = new TweetService();
 
 const createTweet = async (req, res) => {
   try {
-    const imageURI = await uploadOnCloudinary(req.file.path);
-    req.body = { ...req.body, media: imageURI.url };
+    if (req.file) {
+      const imageURI = await uploadOnCloudinary(req.file.path);
+      req.body = { ...req.body, media: imageURI.url };
+    }
 
     const response = await tweetService.createTweet(req.body);
     return res.status(200).json({

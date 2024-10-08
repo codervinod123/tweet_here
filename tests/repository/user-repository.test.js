@@ -13,7 +13,7 @@ test("Testing that a user is gracefully created or not", async () => {
     updatedAt: "2024-08-06",
   };
 
-  const createEntry=jest.spyOn(User, "create").mockImplementation(() => {
+  const createEntry = jest.spyOn(User, "create").mockImplementation(() => {
     return data;
   });
 
@@ -23,43 +23,51 @@ test("Testing that a user is gracefully created or not", async () => {
   expect(createEntry).toHaveBeenCalled();
 });
 
-test("Testing that a user can find by email", async()=>{
-    const user={
-      name: "vinod",
-      email: "vinodpr737947@gmail.com",
-      createdAt: "2024-08-06",
-      updatedAt: "2024-08-06",
-    }
+test("Testing that a user can find by email", async () => {
+  const user = {
+    name: "vinod",
+    email: "vinodpr737947@gmail.com",
+    createdAt: "2024-08-06",
+    updatedAt: "2024-08-06",
+  };
 
-    const mockFindOne = jest.spyOn(User,"findOne").mockImplementation(()=>{
-      return user;
-    })
-   
-    // SOME_EMAIL because we are mocking implementation
-    const email="SOME_EMAIL";
-    const userRepository = new UserRepository();
-    const response=await userRepository.getByEmail(email);
-    expect(response.name).toBe(user.name);
-    expect(response.email).toBe(user.email);
-    expect(mockFindOne).toHaveBeenCalled();
+  const mockFindOne = jest.spyOn(User, "findOne").mockImplementation(() => {
+    return user;
+  });
+
+  // SOME_EMAIL because we are mocking implementation
+  const email = "SOME_EMAIL";
+  const userRepository = new UserRepository();
+  const response = await userRepository.getByEmail(email);
+  expect(response.name).toBe(user.name);
+  expect(response.email).toBe(user.email);
+  expect(mockFindOne).toHaveBeenCalled();
 });
 
-test("Testing that user's profile is getting updated or not", async()=>{
-   const profileData={
-        userId:"SOME_ID",
-        profilePic: "SOME_LINK_TO_USER_PROFILE_PIC",
-        name: "Abhishek",
-        bio: "Software Engineer",
-        location: "India",
-   }
-   const mockUpdateProfile=jest.spyOn(User, 'findByIdAndUpdate').mockImplementation(()=>{
-     return true;
-   })
-   const userRepository = new UserRepository();
-   const response=await userRepository.updateProfilePic(profileData.userId, profileData.profilePic, profileData.name, profileData.bio, profileData.location);
-   expect(response).toBeTruthy();
-   expect(mockUpdateProfile).toHaveBeenCalled();
-})
+test("Testing that user's profile is getting updated or not", async () => {
+  const profileData = {
+    userId: "SOME_ID",
+    profilePic: "SOME_LINK_TO_USER_PROFILE_PIC",
+    name: "Abhishek",
+    bio: "Software Engineer",
+    location: "India",
+  };
+  const mockUpdateProfile = jest
+    .spyOn(User, "findByIdAndUpdate")
+    .mockImplementation(() => {
+      return true;
+    });
+  const userRepository = new UserRepository();
+  const response = await userRepository.updateProfilePic(
+    profileData.userId,
+    profileData.profilePic,
+    profileData.name,
+    profileData.bio,
+    profileData.location,
+  );
+  expect(response).toBeTruthy();
+  expect(mockUpdateProfile).toHaveBeenCalled();
+});
 
 // test('Testing that follower and following is implemented successfully',async()=>{
 //    const usersData={
