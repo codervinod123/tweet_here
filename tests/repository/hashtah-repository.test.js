@@ -1,10 +1,10 @@
-import test from "node:test";
+import { expect, jest, test } from "@jest/globals";
 import { Hashtag } from "../../src/models/index";
 import { HashtagRepository } from "../../src/repository";
 
-jest.mock("../../src/models/index");
+jest.mock("../../src/models/hashtag-model.js");
 
-test("Testing that tweet creation is working fine or not", async () => {
+test("Testing that hashtag creation is working fine or not", async () => {
   const data = {
     hashtag: "#maSayamyJi",
     createdAt: "24-09-2024",
@@ -33,7 +33,7 @@ test("Testing for Hashtag are getting successfukky or not", async () => {
     .spyOn(Hashtag, "findOne")
     .mockImplementation(() => {
       return data;
-    });
+  });
 
   const hashtagRepository = new HashtagRepository();
   const response = await hashtagRepository.read(data);
@@ -42,7 +42,8 @@ test("Testing for Hashtag are getting successfukky or not", async () => {
   expect(response.updatedAt).toBe(data.updatedAt);
   expect(mockHastagRead).toHaveBeenCalled();
 });
-d;
+
+
 test("Testing for Hashtag deleting successfully", async () => {
   const id = "SOME_HASTAG_ID";
   const mockHastagDelete = jest
@@ -56,6 +57,19 @@ test("Testing for Hashtag deleting successfully", async () => {
   expect(response).toBeTruthy();
   expect(mockHastagDelete).toHaveBeenCalled();
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // test("Testing for Hashtag are getting successfully by tag", async ()=>{
 //     const data={

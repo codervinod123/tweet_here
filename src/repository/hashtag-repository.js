@@ -1,6 +1,7 @@
 import { Hashtag } from "../models/index.js";
 
 export class HashtagRepository {
+
   async create(data) {
     try {
       const hashtag = await Hashtag.create(data);
@@ -18,6 +19,7 @@ export class HashtagRepository {
       console.log("Error has occured while creating tweet", error);
     }
   }
+  
 
   async createBulk(data) {
     try {

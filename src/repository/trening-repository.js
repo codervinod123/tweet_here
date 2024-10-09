@@ -1,6 +1,7 @@
 import { Hashtag } from "../models/index.js";
 
 export class TrendingRepository {
+
   async searchTrending(trend) {
     try {
       let response = await Hashtag.find({
@@ -12,6 +13,7 @@ export class TrendingRepository {
       throw { error };
     }
   }
+  
 
   async findAllTrending() {
     try {

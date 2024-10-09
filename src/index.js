@@ -19,7 +19,7 @@ const startServer = () => {
   app.listen(3001, async () => {
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
-
+   
     app.use("/api", router);
 
     await createConnection();
