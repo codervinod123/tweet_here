@@ -6,7 +6,7 @@ export class TrendingRepository {
     try {
       let response = await Hashtag.find({
         hashtag: { $regex: trend },
-      }).populate({ path: "tweets" });
+      }).populate({ path : "tweets" });
       return response;
     } catch (error) {
       console.log("can not search", error);

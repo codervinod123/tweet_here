@@ -14,7 +14,7 @@ const createUser = async (req, res) => {
       profilePic,
     );
     return res.status(200).json({
-      data: response,
+      token: response,
       Message: "User Created Successfully",
       scuccess: true,
       error: {},
@@ -84,7 +84,7 @@ const removeUser = async (req, res) => {
   try {
     const response = await userService.removeUser(req.query.userId);
     return res.status(200).json({
-      data: response,
+      token: response,
       Message: "User removed Successfully",
       scuccess: true,
       error: {},

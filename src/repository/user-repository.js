@@ -6,6 +6,16 @@ export class UserRepository extends CrudRepository {
     super(User);
   }
 
+  async createUser(data) {
+    try {
+      const response = await User.create(data);
+      return response;
+    } catch (error) {
+      console.log("Error has occured while creating entry");
+      throw { error };
+    }
+  }
+
   async getByEmail(email) {
     try {
       const user = await User.findOne({ email: email });

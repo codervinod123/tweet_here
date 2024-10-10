@@ -8,13 +8,41 @@ export class UserService {
   async createUser(email, password, name, profilePic) {
     try {
       const userData = { email, password, name, profilePic };
-      const response = await this.userRepository.createEntry(userData);
-      return response;
+      const user = await this.userRepository.createUser(userData);
+      const token = user.genJWT();
+      user.verifyToken(token);
+      return token;
+
     } catch (error) {
       console.log("Error has  occured while creating user");
       throw { error };
     }
   }
+
+  async authenticateUser(email, password) {
+    try {
+      // checking a user is present in db or not
+      const user = await this.getByEmail(email);
+      if (!user) {
+        console.log("Wrong email id");
+        throw {};
+      }
+
+      // is user is present then will check for
+      if (!user.comparePassword(password)) {
+        console.log("Password Mismatch");
+        throw {};
+      }
+
+      const token = user.genJWT();
+      user.verifyToken(token);
+      return token;
+    } catch (error) {
+      console.log("Error has occured while authenticating user");
+      throw { error };
+    }
+  }
+
 
   async updateUserProfilepic(userId, profilePic, name, bio, location) {
     try {
@@ -58,30 +86,6 @@ export class UserService {
       return true;
     } catch (error) {
       console.log("Error has  occured while deleting user");
-      throw { error };
-    }
-  }
-
-  async authenticateUser(email, password) {
-    try {
-      // checking a user is present in db or not
-      const user = await this.getByEmail(email);
-      if (!user) {
-        console.log("Wrong email id");
-        throw {};
-      }
-
-      // is user is present then will check for
-      if (!user.comparePassword(password)) {
-        console.log("Password Mismatch");
-        throw {};
-      }
-
-      const token = user.genJWT();
-      user.verifyToken(token);
-      return token;
-    } catch (error) {
-      console.log("Error has occured while authenticating user");
       throw { error };
     }
   }
