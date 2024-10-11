@@ -82,7 +82,7 @@ const readUser = async (req, res) => {
 
 const removeUser = async (req, res) => {
   try {
-    const response = await userService.removeUser(req.query.userId);
+    const response = await userService.removeUser(req.params.userId);
     return res.status(200).json({
       token: response,
       Message: "User removed Successfully",
