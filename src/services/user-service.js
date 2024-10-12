@@ -101,5 +101,5 @@ export class UserService {
       console.log("Error has  occured while deleting user");
       throw { error };
     }
-  }
+  } 
 }

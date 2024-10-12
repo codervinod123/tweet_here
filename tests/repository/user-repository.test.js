@@ -69,18 +69,20 @@ test("Testing that user's profile is getting updated or not", async () => {
   expect(mockUpdateProfile).toHaveBeenCalled();
 });
 
-// test('Testing that follower and following is implemented successfully',async()=>{
-//    const usersData={
-//       followerId: "FOLLOWER_ID",
-//       followingId: "FOLLOWING_ID"
-//    }
 
-//    const mockFollowImplementation=jest.spyOn(User, 'updateOne').mockImplementation(()=>{
-//      return true;
-//    })
-//    const userRepository = new UserRepository();
-//    const response=await userRepository.follow(usersData.followerId, usersData.followingId);
-//    console.log(response);
-//    expect(response).toBeTruthy();
-//    expect(mockFollowImplementation).toHaveBeenCalled();
-// })
+
+test('Testing that follower and following is implemented successfully',async()=>{
+   const usersData={
+    Message: "Followed successfully",
+    scuccess: true,
+  }
+
+   const mockFollowImplementation=jest.spyOn(User, 'updateOne').mockImplementation(()=>{
+     return usersData;
+   })
+   const userRepository = new UserRepository();
+   const response=await userRepository.follow();
+   console.log("RESP", response);
+   expect(response.scuccess).toBe(usersData.scuccess);
+   expect(mockFollowImplementation).toHaveBeenCalled();
+})

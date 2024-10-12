@@ -53,8 +53,8 @@ export class TweetService {
   async readTweet(tweetId) {
     try {
       if (!tweetId) {
-        const response = await Tweet.find().populate("author").exec();
-        // console.log(response);
+        const response = await this.tweetRepository.getBulkTweet();
+        console.log(response);
         return response;
       }
       const response = await Tweet.findById(tweetId);

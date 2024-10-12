@@ -15,9 +15,9 @@ export class TrendingService {
     }
   }
 
-  async findAllTrending() {
+  async findAllTrending(pageNo) {
     try {
-      const response = await this.trendingRepo.findAllTrending();
+      const response = await this.trendingRepo.findAllTrending(pageNo);
       return response;
     } catch (error) {
       console.log("can not search", error);

@@ -15,9 +15,9 @@ export class TrendingRepository {
   }
   
 
-  async findAllTrending() {
+  async findAllTrending(pageNo) {
     try {
-      let response = await Hashtag.find().populate({ path: "tweets" });
+      let response = await Hashtag.find().sort({'createdAt': -1}).limit(pageNo*5).populate({ path: "tweets" });
       return response;
     } catch (error) {
       console.log("can not search", error);

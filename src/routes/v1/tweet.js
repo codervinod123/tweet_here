@@ -11,7 +11,7 @@ import { multerUpload } from "../../middlewares/multer-middleware.js";
 const tweetRouter=express.Router();
 
 tweetRouter.post("/tweet", multerUpload, createTweet);
-tweetRouter.get("/tweet", readTweet);
+tweetRouter.get("/", readTweet);
 tweetRouter.delete("/tweet", deleteTweet);
 tweetRouter.post("/like", like);
 tweetRouter.post("/comment", createComment);
