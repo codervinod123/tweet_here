@@ -20,11 +20,12 @@ const createUser = async (req, res) => {
       error: {},
     });
   } catch (error) {
+    console.log("Error", error);
     return res.status(500).json({
       data: {},
       Message: "User can not Created Successfully",
       cuccess: false,
-      error: { error },
+      error: error,
     });
   }
 };
@@ -141,10 +142,9 @@ const getUserByEmail = async (req, res) => {
 const follow = async (req, res) => {
   try {
     const response = await userService.follow(
-      req.headers.followerid,
+      req.headers.userid,
       req.headers.followingid,
     );
-    console.log(response);
     return res.status(200).json({
       data: response,
       Message: "Followed successfully",

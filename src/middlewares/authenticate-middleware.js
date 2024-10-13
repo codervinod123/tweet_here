@@ -2,9 +2,9 @@ import jwt from "jsonwebtoken";
 
 const authenticateUser = (req, res, next) => {
   try {
-    const token=req.headers.followerid;
+    const token = req.headers.token;
     const response = jwt.verify(token, "twitter_app");
-    req.headers.followerid = response.id;
+    req.headers.userid = response.id;
     next();
   } catch (error) {
     console.log(error);

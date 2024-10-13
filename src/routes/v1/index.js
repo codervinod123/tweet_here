@@ -6,9 +6,8 @@ import trendingRouter from "./trending.js";
 
 const router = express.Router();
 
-router.use("/user" , userRouter);
-router.use("/tweet" , tweetRouter);
-router.use("/trending" , trendingRouter);
-
+router.use("/user", userRouter);
+router.use("/tweet", tweetRouter);
+router.use("/trending", trendingRouter);
 
 export default router;

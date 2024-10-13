@@ -33,7 +33,7 @@ test("Testing for Hashtag are getting successfukky or not", async () => {
     .spyOn(Hashtag, "findOne")
     .mockImplementation(() => {
       return data;
-  });
+    });
 
   const hashtagRepository = new HashtagRepository();
   const response = await hashtagRepository.read(data);
@@ -42,7 +42,6 @@ test("Testing for Hashtag are getting successfukky or not", async () => {
   expect(response.updatedAt).toBe(data.updatedAt);
   expect(mockHastagRead).toHaveBeenCalled();
 });
-
 
 test("Testing for Hashtag deleting successfully", async () => {
   const id = "SOME_HASTAG_ID";
@@ -57,19 +56,6 @@ test("Testing for Hashtag deleting successfully", async () => {
   expect(response).toBeTruthy();
   expect(mockHastagDelete).toHaveBeenCalled();
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // test("Testing for Hashtag are getting successfully by tag", async ()=>{
 //     const data={

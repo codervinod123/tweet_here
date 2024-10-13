@@ -11,7 +11,6 @@ export class UserRepository extends CrudRepository {
       const response = await User.create(data);
       return response;
     } catch (error) {
-      console.log("Error has occured while creating entry");
       throw { error };
     }
   }

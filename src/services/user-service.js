@@ -12,10 +12,8 @@ export class UserService {
       const token = user.genJWT();
       user.verifyToken(token);
       return token;
-
     } catch (error) {
-      console.log("Error has  occured while creating user");
-      throw { error };
+      throw error;
     }
   }
 
@@ -42,7 +40,6 @@ export class UserService {
       throw { error };
     }
   }
-
 
   async updateUserProfilepic(userId, profilePic, name, bio, location) {
     try {
@@ -101,5 +98,5 @@ export class UserService {
       console.log("Error has  occured while deleting user");
       throw { error };
     }
-  } 
+  }
 }

@@ -23,7 +23,7 @@ const searchTrending = async (req, res) => {
 
 const allTrending = async (req, res) => {
   try {
-    const pageNo=req.query.page;
+    const pageNo = req.query.page;
     const trending = await trendingService.findAllTrending(pageNo);
     return res.status(201).json({
       data: trending,

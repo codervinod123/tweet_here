@@ -12,11 +12,11 @@ import {
   removeUser,
   getUserByEmail,
   updateProfilePic,
-  follow
+  follow,
 } from "../../controller/index.js";
 
-// Endpoints related to User
-userRouter.post("/signup", authValidator, welcomeMailSender, createUser);
+// Endpoints related to User welcomeMailSender
+userRouter.post("/signup", welcomeMailSender, createUser);
 userRouter.post("/signin", authValidator, loginUser);
 userRouter.get("/", readUser);
 userRouter.delete("/:userId", removeUser);
@@ -24,6 +24,5 @@ userRouter.post("/updateprofile", multerUpload, updateProfilePic);
 userRouter.post("/follow", authenticateUser, follow);
 // below is not is use
 userRouter.post("/login/email", getUserByEmail);
-
 
 export default userRouter;

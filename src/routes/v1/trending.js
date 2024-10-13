@@ -1,10 +1,7 @@
 import express from "express";
-import {
-  searchTrending,
-  allTrending,
-} from "../../controller/index.js";
+import { searchTrending, allTrending } from "../../controller/index.js";
 
-const trendingRouter=express.Router();
+const trendingRouter = express.Router();
 
 trendingRouter.get("/", searchTrending);
 trendingRouter.get("/bulk", allTrending);

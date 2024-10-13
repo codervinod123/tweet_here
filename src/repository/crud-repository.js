@@ -9,7 +9,7 @@ export class CrudRepository {
       return response;
     } catch (error) {
       console.log("Error has occured while creating entry");
-      throw { error };
+      throw error;
     }
   }
 
@@ -23,7 +23,7 @@ export class CrudRepository {
       return response;
     } catch (error) {
       console.log("Error occured while fetching entry xxxxxxxx");
-      throw { error };
+      throw error;
     }
   }
 
@@ -33,7 +33,7 @@ export class CrudRepository {
       return true;
     } catch (error) {
       console.log("Error occured while deleting entry");
-      throw { error };
+      throw error;
     }
   }
 
@@ -43,8 +43,7 @@ export class CrudRepository {
       return response;
     } catch (error) {
       console.log("Error occured while updating entry");
-      throw { error };
+      throw error;
     }
   }
-  
 }
