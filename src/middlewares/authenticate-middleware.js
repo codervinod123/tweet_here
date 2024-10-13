@@ -1,19 +1,28 @@
-import passport from "passport";
+import jwt from "jsonwebtoken";
 
 const authenticateUser = (req, res, next) => {
-  passport.authenticate("jwt", (err, user) => {
-    if (err) {
-      console.log("Erro occured");
-      next(err);
-    }
-    if (!user) {
-      return res.status(500).json({
-        Message: "User is unauthorize",
-      });
-    }
-    req.user = user;
+  try {
+    const token=req.headers.followerid;
+    const response = jwt.verify(token, "twitter_app");
+    req.headers.followerid = response.id;
     next();
-  })(req, res, next);
+  } catch (error) {
+    console.log(error);
+  }
+
+  // passport.authenticate("jwt", (err, user) => {
+  //   if (err) {
+  //     console.log("Erro occured");
+  //     next(err);
+  //   }
+  //   if (!user) {
+  //     return res.status(500).json({
+  //       Message: "User is unauthorize hai bro",
+  //     });
+  //   }
+  //   req.user = user;
+  //   next();
+  // })(req, res, next);
 };
 
 export { authenticateUser };

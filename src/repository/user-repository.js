@@ -51,6 +51,7 @@ export class UserRepository extends CrudRepository {
         { _id: followingId },
         { $addToSet: { followersList: followerId } },
       );
+      return true;
     } catch (error) {
       console.log("Error has occured while finding user");
       throw { error };

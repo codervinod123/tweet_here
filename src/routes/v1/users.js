@@ -2,6 +2,7 @@ import express from "express";
 import { multerUpload } from "../../middlewares/multer-middleware.js";
 import { authValidator } from "../../middlewares/authValidator-middleware.js";
 import welcomeMailSender from "../../middlewares/email-sender-middleware.js";
+import { authenticateUser } from "../../middlewares/authenticate-middleware.js";
 
 const userRouter = express.Router();
 import {
@@ -20,7 +21,7 @@ userRouter.post("/signin", authValidator, loginUser);
 userRouter.get("/", readUser);
 userRouter.delete("/:userId", removeUser);
 userRouter.post("/updateprofile", multerUpload, updateProfilePic);
-userRouter.post("/follow", follow);
+userRouter.post("/follow", authenticateUser, follow);
 // below is not is use
 userRouter.post("/login/email", getUserByEmail);
 

@@ -54,11 +54,9 @@ export class TweetService {
     try {
       if (!tweetId) {
         const response = await this.tweetRepository.getBulkTweet();
-        console.log(response);
         return response;
       }
       const response = await Tweet.findById(tweetId);
-      //  console.log(response);
       return response;
     } catch (error) {
       console.log("Error has occured while creating tweet", error);
