@@ -5,15 +5,14 @@ const commentService = new CommentService();
 const createComment = async (req, res) => {
   try {
     const response = await commentService.toggleModel(
-      req.query.modelName,
-      req.query.modelId,
-      req.body.userId,
+      req.headers.modelname,
+      req.headers.modelid,
+      req.headers.userid,
       req.body.commentItem,
     );
     return res.status(200).json({
-      data: response,
-      cuccess: true,
-      error: {},
+      response: response,
+      scuccess: true,
       Message: "Comment created Successfully",
     });
   } catch (error) {

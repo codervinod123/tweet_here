@@ -15,6 +15,6 @@ tweetRouter.post("/tweet", multerUpload, createTweet);
 tweetRouter.get("/", readTweet);
 tweetRouter.delete("/tweet", deleteTweet);
 tweetRouter.post("/like", authenticateUser, like);
-tweetRouter.post("/comment", createComment);
+tweetRouter.post("/comment", authenticateUser, createComment);
 
 export default tweetRouter;
