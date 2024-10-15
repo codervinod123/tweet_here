@@ -25,4 +25,24 @@ const createComment = async (req, res) => {
   }
 };
 
-export { createComment };
+const getComments= async(req, res)=> {
+  try {
+    const response = await commentService.readComments(
+      req.headers.postid,
+    );
+    return res.status(200).json({
+      response: response,
+      scuccess: true,
+      Message: "Comment fetched Successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      data: null,
+      cuccess: false,
+      error: { error },
+      Message: "Comment can not fetched Successfully",
+    });
+  }
+}
+
+export { createComment, getComments };

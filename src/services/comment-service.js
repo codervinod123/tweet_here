@@ -36,4 +36,14 @@ export class CommentService {
       console.log("Error has occured", error);
     }
   }
+
+  async readComments(postId) {
+    try {
+      const response = await this.commentRepository.getComments(postId);
+      return response;
+    } catch (error) {
+      console.log("Error has occured", error); 
+    }
+  }
+
 }

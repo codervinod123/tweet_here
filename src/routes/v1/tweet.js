@@ -5,6 +5,7 @@ import {
   readTweet,
   deleteTweet,
   createComment,
+  getComments,
 } from "../../controller/index.js";
 import { multerUpload } from "../../middlewares/multer-middleware.js";
 import { authenticateUser } from "../../middlewares/authenticate-middleware.js";
@@ -16,5 +17,7 @@ tweetRouter.get("/", readTweet);
 tweetRouter.delete("/tweet", deleteTweet);
 tweetRouter.post("/like", authenticateUser, like);
 tweetRouter.post("/comment", authenticateUser, createComment);
+tweetRouter.get("/comment", getComments);
+
 
 export default tweetRouter;

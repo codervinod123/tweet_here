@@ -10,7 +10,7 @@ import {
   updateProfilePic,
   follow,
 } from "./user-controller.js";
-import { createComment } from "./comment-repository.js";
+import { createComment, getComments } from "./comment-repository.js";
 
 export {
   createUser,
@@ -24,6 +24,7 @@ export {
   readTweet,
   deleteTweet,
   createComment,
+  getComments,
   searchTrending,
   allTrending,
   follow,

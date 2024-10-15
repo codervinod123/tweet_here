@@ -13,7 +13,7 @@ export class UserService {
       user.verifyToken(token);
       return token;
     } catch (error) {
-      throw error;
+      throw {error};
     }
   }
 
