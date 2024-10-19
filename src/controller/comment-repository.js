@@ -26,9 +26,12 @@ const createComment = async (req, res) => {
 };
 
 const getComments= async(req, res)=> {
+
+  const pageNo=req.query.page;
   try {
     const response = await commentService.readComments(
       req.headers.postid,
+      pageNo 
     );
     return res.status(200).json({
       response: response,

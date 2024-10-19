@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { JWT_SECRET } from "../config/serverConfig.js";
+
 
 const userSchema = new mongoose.Schema(
   {
@@ -44,20 +46,20 @@ const userSchema = new mongoose.Schema(
 
 // comparing the encrypted passsword with user's entered password
 userSchema.methods.comparePassword = function compare(password) {
-  const x = bcrypt.compareSync(password, this.password);
-  return x;
+  const response = bcrypt.compareSync(password, this.password);
+  return response;
 };
 
 // generating the jwt token for sendint it with subsequent request
 userSchema.methods.genJWT = function genJwt() {
-  return jwt.sign({ id: this.id, email: this.email }, "twitter_app", {
-    expiresIn: 3600,
+  return jwt.sign({ id: this.id, email: this.email }, JWT_SECRET, {
+    expiresIn: "24h",
   });
 };
 
 // verifying token with secret key
 userSchema.methods.verifyToken = function verify(token) {
-  const response = jwt.verify(token, "twitter_app");
+  const response = jwt.verify(token, JWT_SECRET);
   return response;
 };
 

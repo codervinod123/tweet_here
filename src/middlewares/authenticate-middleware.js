@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import { JWT_SECRET } from "../config/serverConfig.js";
 
 const authenticateUser = (req, res, next) => {
   try {

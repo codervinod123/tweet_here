@@ -1,10 +1,11 @@
 import { v2 as cloudinary } from "cloudinary";
 import fs from "fs";
+import { CLOUD_NAME, API_KEY, API_SECRET } from "../config/serverConfig.js";
 
 cloudinary.config({
-  cloud_name: "prajapatiautomobiles",
-  api_key: "686826227739641",
-  api_secret: "oNtMNL6k4XGDOgjO--GLIUuTE3c",
+  cloud_name: CLOUD_NAME,
+  api_key: API_KEY,
+  api_secret: API_SECRET,
 });
 
 const uploadOnCloudinary = async (localFilePath, usersProfilePics) => {

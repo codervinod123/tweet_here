@@ -37,9 +37,9 @@ export class CommentService {
     }
   }
 
-  async readComments(postId) {
+  async readComments(postId, pageNo) {
     try {
-      const response = await this.commentRepository.getComments(postId);
+      const response = await this.commentRepository.getComments(postId, pageNo);
       return response;
     } catch (error) {
       console.log("Error has occured", error); 

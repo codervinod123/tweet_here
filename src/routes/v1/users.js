@@ -16,7 +16,7 @@ import {
 } from "../../controller/index.js";
 
 // Endpoints related to User welcomeMailSender
-userRouter.post("/signup", welcomeMailSender, createUser);
+userRouter.post("/signup", createUser);
 userRouter.post("/signin", authValidator, loginUser);
 userRouter.get("/", readUser);
 userRouter.delete("/:userId", removeUser);

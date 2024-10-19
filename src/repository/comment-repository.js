@@ -7,14 +7,19 @@ export class CommentRepository extends CrudRepository {
   }
 
   
-  async getComments(postId) {
+  async getComments(postId, pageNo) {
     try {
       if (!postId) {
         const response = await Comment.find();
         return response;
       }
-      const response = await Comment.find({commentable:postId})
-      return response;
+      if(pageNo == 1){
+        const response = await Comment.find({commentable:postId}).limit(pageNo*1);
+        return response;
+      }else{
+        const response = await Comment.find({commentable:postId}).limit(pageNo*3);
+        return response;
+      }
     } catch (error) {
       console.log("Error occured while fetching entry xxxxxxxx");
       throw error;
