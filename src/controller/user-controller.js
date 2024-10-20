@@ -31,6 +31,7 @@ const createUser = async (req, res) => {
 };
 
 const updateProfilePic = async (req, res) => {
+  console.log("Userid", req.headers.userid,);
   try {
     const imageURI = await uploadOnCloudinary(
       req.file.path,
@@ -39,7 +40,7 @@ const updateProfilePic = async (req, res) => {
     const imageTransForm = `https://res.cloudinary.com/prajapatiautomobiles/image/upload/c_thumb,g_face,h_200,w_200/r_max/f_auto/v${imageURI.version}/${imageURI.public_id}`;
     req.body = { ...req.body, profilePic: imageTransForm };
     const response = await userService.updateUserProfilepic(
-      req.body.id,
+      req.headers.userid,
       req.body.profilePic,
       req.body.name,
       req.body.bio,

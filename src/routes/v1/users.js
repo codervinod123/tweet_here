@@ -20,7 +20,7 @@ userRouter.post("/signup", createUser);
 userRouter.post("/signin", authValidator, loginUser);
 userRouter.get("/", readUser);
 userRouter.delete("/:userId", removeUser);
-userRouter.post("/updateprofile", multerUpload, updateProfilePic);
+userRouter.post("/updateprofile", authenticateUser, multerUpload, updateProfilePic);
 userRouter.post("/follow", authenticateUser, follow);
 // below is not is use
 userRouter.post("/login/email", getUserByEmail);
