@@ -8,7 +8,6 @@ export class CrudRepository {
       const response = await this.model.create(data);
       return response;
     } catch (error) {
-      console.log("Error has occured while creating entry");
       throw error;
     }
   }

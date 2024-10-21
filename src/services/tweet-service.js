@@ -1,6 +1,7 @@
 import Tweet from "../models/tweet-model.js";
 import Like from "../models/like-model.js";
 import Comment from "../models/comment-model.js";
+import { ValidationError } from "../utils/validationError.js";
 
 import { TweetRepository, HashtagRepository } from "../repository/index.js";
 
@@ -45,8 +46,11 @@ export class TweetService {
       //  }
       return tweet;
     } catch (error) {
-      console.log("Error has occured while creating tweet", error);
-      throw { error };
+      if(error.name == "ValidationError"){
+        const validationError=new ValidationError(error);
+        throw validationError;
+      }
+      throw error;
     }
   }
 

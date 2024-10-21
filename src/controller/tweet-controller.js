@@ -18,12 +18,10 @@ const createTweet = async (req, res) => {
       error: {},
     });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({
-      data: {},
       Message: "Tweet can not Created Successfully",
       success: false,
-      error: { error },
+      error: error,
     });
   }
 };

@@ -1,12 +1,18 @@
-// import { StatusCodes } from "http-status-codes";
+import { StatusCodes } from "http-status-codes";
 
-// class ErrorValidation{
-//   constructor(name="App Error", message, explanation, statuscode){
-//     this.name = name,
-//     this.message =  message,
-//     this.explanation = explanation,
-//     this.statuscode = StatusCodes.INTERNAL_SERVER_ERROR,
-//   }
-// }
+class AppError extends Error{
+    constructor(
+        name,
+        explanation,
+        statusCode,
+        message,
+    ) {
+        super();
+        this.name=name,
+        this.explanation=explanation,
+        this.statusCode=statusCode,
+        this.message=message
+    }
+}
 
-// export {ErrorValidation}
+export { AppError };
