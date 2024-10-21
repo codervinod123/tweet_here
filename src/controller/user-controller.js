@@ -46,12 +46,10 @@ const updateProfilePic = async (req, res) => {
       data: response,
       Message: "Profilepic updated",
       scuccess: true,
-      error: {},
     });
   } catch (error) {
     console.log(error);
     return res.status(500).json({
-      data: {},
       Message: "Profile Pic can not Update jjj",
       scuccess: false,
       error: { error },

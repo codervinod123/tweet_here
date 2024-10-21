@@ -4,11 +4,13 @@ import { JWT_SECRET } from "../config/serverConfig.js";
 const authenticateUser = (req, res, next) => {
   try {
     const token = req.headers.token;
-    const response = jwt.verify(token, "twitter_app");
+    const response = jwt.verify(token, JWT_SECRET);
     req.headers.userid = response.id;
     next();
   } catch (error) {
-    console.log(error);
+    return res.status(400).json({
+        error: error
+    })
   }
 
   // passport.authenticate("jwt", (err, user) => {

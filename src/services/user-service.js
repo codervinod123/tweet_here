@@ -70,6 +70,7 @@ export class UserService {
     }
   }
 
+
   async updateUserProfilepic(userId, profilePic, name, bio, location) {
     try {
       const response = await this.userRepository.updateProfilePic(
@@ -81,10 +82,14 @@ export class UserService {
       );
       return response;
     } catch (error) {
-      console.log("Error has  occured while updating ProfilePic");
-      throw { error };
+      throw error;
     }
   }
+
+
+
+
+
 
   async readUser(userId) {
     try {
