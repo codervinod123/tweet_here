@@ -15,7 +15,6 @@ const createTweet = async (req, res) => {
       data: response,
       Message: "Tweet has Created Successfully",
       success: true,
-      error: {},
     });
   } catch (error) {
     return res.status(500).json({
@@ -33,14 +32,12 @@ const readTweet = async (req, res) => {
       data: response,
       Message: "Tweet has fetched Successfully",
       success: true,
-      error: {},
     });
   } catch (error) {
     return res.status(500).json({
-      data: {},
       Message: "Tweet can not fetched Successfully",
       cuccess: false,
-      error: { error },
+      error: error,
     });
   }
 };

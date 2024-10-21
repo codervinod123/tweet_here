@@ -21,7 +21,6 @@ export class CrudRepository {
       const response = await this.model.findById(entryId);
       return response;
     } catch (error) {
-      console.log("Error occured while fetching entry xxxxxxxx");
       throw error;
     }
   }

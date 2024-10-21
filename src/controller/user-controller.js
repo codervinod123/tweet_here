@@ -26,6 +26,26 @@ const createUser = async (req, res) => {
   }
 };
 
+const loginUser = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const response = await userService.authenticateUser(email, password);
+    return res.status(200).json({
+      token: response,
+      Message: "User authenticated successfully",
+      scuccess: true,
+      error: {},
+    });
+  } catch (error) {
+    return res.status(500).json({
+      data: null,
+      Message: "User can not authenticated successfully  controller",
+      scuccess: false,
+      error: error,
+    });
+  }
+};
+
 const updateProfilePic = async (req, res) => {
   console.log("Userid", req.headers.userid,);
   try {
@@ -48,9 +68,8 @@ const updateProfilePic = async (req, res) => {
       scuccess: true,
     });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({
-      Message: "Profile Pic can not Update jjj",
+      Message: "Profile Pic can not Update",
       scuccess: false,
       error: { error },
     });
@@ -64,11 +83,9 @@ const readUser = async (req, res) => {
       data: response,
       Message: "User fetched Successfully",
       scuccess: true,
-      error: {},
     });
   } catch (error) {
     return res.status(500).json({
-      data: {},
       Message: "Tweet can not fetched Successfully",
       cuccess: false,
       error: { error },
@@ -95,25 +112,6 @@ const removeUser = async (req, res) => {
   }
 };
 
-const loginUser = async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    const response = await userService.authenticateUser(email, password);
-    return res.status(200).json({
-      token: response,
-      Message: "User authenticated successfully",
-      scuccess: true,
-      error: {},
-    });
-  } catch (error) {
-    return res.status(500).json({
-      data: null,
-      Message: "User can not authenticated successfully  controller",
-      scuccess: false,
-      error: error,
-    });
-  }
-};
 
 const getUserByEmail = async (req, res) => {
   try {

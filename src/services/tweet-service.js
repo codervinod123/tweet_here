@@ -2,10 +2,12 @@ import Tweet from "../models/tweet-model.js";
 import Like from "../models/like-model.js";
 import Comment from "../models/comment-model.js";
 import { ValidationError } from "../errorhandlers/validationError.js";
-
 import { TweetRepository, HashtagRepository } from "../repository/index.js";
+import { ClientError } from "../errorhandlers/client-error.js";
+import { StatusCodes } from "http-status-codes";
 
 export class TweetService {
+ 
   constructor() {
     this.tweetRepository = new TweetRepository();
     this.hashtagRepository = new HashtagRepository();
@@ -14,7 +16,20 @@ export class TweetService {
   async createTweet(data) {
     try {
       const content = data.content;
-      let tags = content.match(/#[a-zA-Z0-9_]+/g);
+      if(!content) {
+         const clientError=new ClientError(
+          "ContentNotProvided",
+          "Content Not Provided",
+          StatusCodes.BAD_REQUEST,
+          "Please provide atleast Content or media"
+         );
+         throw clientError;
+      }
+
+      let tags;
+      if(content){
+        tags=content.match(/#[a-zA-Z0-9_]+/g);
+      }
       const tweet = await this.tweetRepository.createEntry(data);
 
       if (tags) {
@@ -33,17 +48,6 @@ export class TweetService {
           item.save();
         });
       }
-      //  if(tags){
-      //     tags=tags.map((s)=>s.substring(1));
-
-      //     var idddddd=tags.map(async(tag)=>{
-      //       const hashTag=await Hashtag.findOne({hashtag:tag});
-      //         if(!hashTag){
-      //           const htg=await Hashtag.create({hashtag:tag,tweets:IDX});
-      //           return htg._id.toString();
-      //       }
-      //      })
-      //  }
       return tweet;
     } catch (error) {
       if(error.name == "ValidationError"){
@@ -82,4 +86,5 @@ export class TweetService {
       throw { error };
     }
   }
+  
 }

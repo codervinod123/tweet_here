@@ -86,20 +86,16 @@ export class UserService {
     }
   }
 
-
-
-
-
-
   async readUser(userId) {
     try {
       const response = await this.userRepository.readEntry(userId);
       return response;
     } catch (error) {
-      console.log("Error has  occured while deleting user");
-      throw { error };
+      console.log("ERRROR ###3", error.reason);
+      throw error;
     }
   }
+
 
   async getByEmail(userEmail) {
     try {
@@ -117,7 +113,7 @@ export class UserService {
       return true;
     } catch (error) {
       console.log("Error has  occured while deleting user");
-      throw { error };
+      throw error;
     }
   }
 
@@ -133,4 +129,5 @@ export class UserService {
       throw { error };
     }
   }
+
 }
