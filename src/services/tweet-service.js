@@ -1,7 +1,7 @@
 import Tweet from "../models/tweet-model.js";
 import Like from "../models/like-model.js";
 import Comment from "../models/comment-model.js";
-import { ValidationError } from "../utils/validationError.js";
+import { ValidationError } from "../errorhandlers/validationError.js";
 
 import { TweetRepository, HashtagRepository } from "../repository/index.js";
 

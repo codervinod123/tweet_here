@@ -1,4 +1,7 @@
 import { UserRepository } from "../repository/index.js";
+import { ClientError } from "../errorhandlers/client-error.js";
+import { StatusCodes } from "http-status-codes";
+
 
 export class UserService {
   constructor() {
@@ -22,22 +25,31 @@ export class UserService {
       // checking a user is present in db or not
       const user = await this.getByEmail(email);
       if (!user) {
-        console.log("Wrong email id");
-        throw {};
+         const clientError=new ClientError(
+          "AttributeNotFound",
+          "Invalid Email id send",
+          StatusCodes.NOT_FOUND,
+          "Please check your Email id , we have't this email in our record"
+         );
+         throw clientError;
       }
 
       // is user is present then will check for
       if (!user.comparePassword(password)) {
-        console.log("Password Mismatch");
-        throw {};
+        const clientError=new ClientError(
+          "PassworNotMatched",
+          "Invalid Password",
+          StatusCodes.NOT_FOUND,
+          "Please check your Password , we have't this pass associated with any Email"
+         );
+         throw clientError;
       }
 
       const token = user.genJWT();
       user.verifyToken(token);
       return token;
     } catch (error) {
-      console.log("Error has occured while authenticating user");
-      throw { error };
+      throw error;
     }
   }
 
