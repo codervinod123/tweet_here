@@ -1,6 +1,8 @@
 import { UserRepository } from "../repository/index.js";
 import { ClientError } from "../errorhandlers/client-error.js";
 import { StatusCodes } from "http-status-codes";
+import { MongoError } from "../errorhandlers/mongo-error.js";
+
 
 
 export class UserService {
@@ -16,7 +18,22 @@ export class UserService {
       user.verifyToken(token);
       return token;
     } catch (error) {
-      throw {error};
+      
+      if(error.name == "MongoServerError"){
+          const mongoError=new MongoError(error);
+          throw mongoError;  
+      }
+      if(error.name == "ValidationError"){
+        const clientError=new ClientError(
+          error.name,
+          error.message,
+          StatusCodes.BAD_REQUEST,
+          error._message
+        );
+        throw clientError;  
+      }
+
+      throw error;
     }
   }
 

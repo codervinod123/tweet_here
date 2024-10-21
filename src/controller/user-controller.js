@@ -6,7 +6,6 @@ const userService = new UserService();
 const createUser = async (req, res) => {
   try {
     const { email, password, name, profilePic } = req.body;
-
     const response = await userService.createUser(
       email,
       password,
@@ -16,15 +15,12 @@ const createUser = async (req, res) => {
     return res.status(200).json({
       token: response,
       Message: "User Created Successfully",
-      scuccess: true,
-      error: {},
+      scuccess: true
     });
   } catch (error) {
-    console.log("Error", error);
     return res.status(500).json({
-      data: {},
-      Message: "User can not Created Successfully",
-      cuccess: false,
+      Message: "User can not Created Successfully#",
+      success: false,
       error: error,
     });
   }

@@ -11,7 +11,7 @@ export class UserRepository extends CrudRepository {
       const response = await User.create(data);
       return response;
     } catch (error) {
-      throw { error };
+      throw error;
     }
   }
 
