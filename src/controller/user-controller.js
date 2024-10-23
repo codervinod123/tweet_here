@@ -31,14 +31,12 @@ const loginUser = async (req, res) => {
     const { email, password } = req.body;
     const response = await userService.authenticateUser(email, password);
     return res.status(200).json({
-      token: response,
+      data: response,
       Message: "User authenticated successfully",
       scuccess: true,
-      error: {},
     });
   } catch (error) {
     return res.status(500).json({
-      data: null,
       Message: "User can not authenticated successfully  controller",
       scuccess: false,
       error: error,

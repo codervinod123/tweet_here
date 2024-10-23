@@ -40,8 +40,8 @@ export class UserService {
   async authenticateUser(email, password) {
     try {
       // checking a user is present in db or not
-      const user = await this.getByEmail(email);
-      if (!user) {
+      const res = await this.getByEmail(email);
+      if (!res) {
          const clientError=new ClientError(
           "AttributeNotFound",
           "Invalid Email id send",
@@ -52,7 +52,7 @@ export class UserService {
       }
 
       // is user is present then will check for
-      if (!user.comparePassword(password)) {
+      if (!res.comparePassword(password)) {
         const clientError=new ClientError(
           "PassworNotMatched",
           "Invalid Password",
@@ -62,9 +62,22 @@ export class UserService {
          throw clientError;
       }
 
-      const token = user.genJWT();
-      user.verifyToken(token);
-      return token;
+      const token = res.genJWT();
+      res.verifyToken(token);
+
+      const user={
+        name: res.name,
+        email: res.email,
+        bio: res.bio,
+        createdAt: res.createdAt,
+        followerList: res.followersList,
+        followingList: res.followingList,
+        location: res.location,
+        profilePic: res.profilePic,
+        _id: res._id,
+      }
+      
+      return {user, token};
     } catch (error) {
       throw error;
     }
