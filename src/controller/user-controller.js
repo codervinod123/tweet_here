@@ -13,7 +13,7 @@ const createUser = async (req, res) => {
       profilePic,
     );
     return res.status(200).json({
-      token: response,
+      data: response,
       Message: "User Created Successfully",
       scuccess: true
     });

@@ -13,10 +13,24 @@ export class UserService {
   async createUser(email, password, name, profilePic) {
     try {
       const userData = { email, password, name, profilePic };
-      const user = await this.userRepository.createUser(userData);
-      const token = user.genJWT();
-      user.verifyToken(token);
-      return token;
+      const res = await this.userRepository.createUser(userData);
+      console.log("Userrrrrrrrrrrrrrrrrrr", res);
+      const token = res.genJWT();
+      res.verifyToken(token);
+
+      const user={
+        name: res.name,
+        email: res.email,
+        bio: res.bio,
+        createdAt: res.createdAt,
+        followerList: res.followersList,
+        followingList: res.followingList,
+        location: res.location,
+        profilePic: res.profilePic,
+        _id: res._id,
+      }
+
+      return {user, token};
     } catch (error) {
       
       if(error.name == "MongoServerError"){
