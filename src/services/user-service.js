@@ -14,7 +14,6 @@ export class UserService {
     try {
       const userData = { email, password, name, profilePic };
       const res = await this.userRepository.createUser(userData);
-      console.log("Userrrrrrrrrrrrrrrrrrr", res);
       const token = res.genJWT();
       res.verifyToken(token);
 
@@ -94,6 +93,15 @@ export class UserService {
       return {user, token};
     } catch (error) {
       throw error;
+    }
+  }
+
+  async searchUser(searchText){
+    try {
+        const response = await this.userRepository.searchUser(searchText);
+        return response;
+    } catch (error) {
+       return error;
     }
   }
 

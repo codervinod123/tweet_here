@@ -9,12 +9,14 @@ import {
   getUserByEmail,
   updateProfilePic,
   follow,
+  searchUser,
 } from "./user-controller.js";
 import { createComment, getComments } from "./comment-repository.js";
 
 export {
   createUser,
   loginUser,
+  searchUser,
   readUser,
   removeUser,
   getUserByEmail,

@@ -15,6 +15,19 @@ export class UserRepository extends CrudRepository {
     }
   }
 
+  async searchUser(searchText) {
+    try {
+      if(searchText){
+        const response = await User.find({name: { $regex: new RegExp('^' + searchText.toLowerCase(), 'i') }});
+        return response;
+      }
+      const response = await User.find(searchText);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async getByEmail(email) {
     try {
       const user = await User.findOne({ email: email });

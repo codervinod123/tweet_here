@@ -13,6 +13,7 @@ import {
   getUserByEmail,
   updateProfilePic,
   follow,
+  searchUser
 } from "../../controller/index.js";
 
 // Endpoints related to User welcomeMailSender
@@ -22,6 +23,8 @@ userRouter.get("/", readUser);
 userRouter.delete("/:userId", removeUser);
 userRouter.post("/updateprofile", authenticateUser, multerUpload, updateProfilePic);
 userRouter.post("/follow", authenticateUser, follow);
+userRouter.get("/search", searchUser);
+
 // below is not is use
 userRouter.post("/login/email", getUserByEmail);
 
