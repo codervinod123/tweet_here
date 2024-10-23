@@ -6,14 +6,10 @@ export class TweetRepository extends CrudRepository {
     super(Tweet);
   }
 
-  async getBulkTweet(entryId) {
+  async getBulkTweet(pageNo) {
     try {
-      if (!entryId) {
-        const response = await this.model.find();
+        const response = await this.model.find().sort({ createdAt: -1 }).limit(pageNo*10);
         return response;
-      }
-      const response = await this.model.findById(entryId);
-      return response;
     } catch (error) {
       console.log("Error occured while fetching entry xxxxxxxx");
       throw { error };

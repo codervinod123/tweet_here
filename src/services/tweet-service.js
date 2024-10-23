@@ -58,16 +58,16 @@ export class TweetService {
     }
   }
 
-  async readTweet(tweetId) {
+  async readTweet(tweetId, pageNo) {
     try {
       if (!tweetId) {
-        const response = await this.tweetRepository.getBulkTweet();
+        const response = await this.tweetRepository.getBulkTweet(pageNo);
         return response;
       }
       const response = await Tweet.findById(tweetId);
       return response;
     } catch (error) {
-      console.log("Error has occured while creating tweet", error);
+      console.log("Error has occured while Getting tweet", error);
       throw { error };
     }
   }
