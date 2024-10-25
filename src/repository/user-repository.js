@@ -47,7 +47,7 @@ export class UserRepository extends CrudRepository {
         name: name,
         bio: bio,
         location: location,
-      });
+      },{ new: true });
       return user;
     } catch (error) {
       console.log("Error has occured while finding user");
