@@ -19,5 +19,4 @@ tweetRouter.post("/like", authenticateUser, like);
 tweetRouter.post("/comment", authenticateUser, createComment);
 tweetRouter.get("/comment", getComments);
 
-
 export default tweetRouter;

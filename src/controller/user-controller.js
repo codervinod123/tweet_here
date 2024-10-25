@@ -1,6 +1,5 @@
 import { UserService } from "../services/index.js";
 import { uploadOnCloudinary } from "../utils/upload-cloudinary.js";
-import User from "../models/user-model.js";
 
 const userService = new UserService();
 
@@ -16,7 +15,7 @@ const createUser = async (req, res) => {
     return res.status(200).json({
       data: response,
       Message: "User Created Successfully",
-      scuccess: true
+      scuccess: true,
     });
   } catch (error) {
     return res.status(500).json({
@@ -46,23 +45,22 @@ const loginUser = async (req, res) => {
 };
 
 const searchUser = async (req, res) => {
-    try {
-        const searchText=req.query.searchquery;
-        const response=await userService.searchUser(searchText);
-        return res.status(200).json({
-          message: "user get successfully",
-          users: response,
-        });
-    } catch (error) {
-      return res.status(200).json({
-        message: "user can not get successfully",
-        error: error,
-      });
-    }
-}
+  try {
+    const searchText = req.query.searchquery;
+    const response = await userService.searchUser(searchText);
+    return res.status(200).json({
+      message: "user get successfully",
+      users: response,
+    });
+  } catch (error) {
+    return res.status(200).json({
+      message: "user can not get successfully",
+      error: error,
+    });
+  }
+};
 
 const updateProfilePic = async (req, res) => {
-  console.log("Userid", req.headers.userid,);
   try {
     const imageURI = await uploadOnCloudinary(
       req.file.path,
@@ -126,7 +124,6 @@ const removeUser = async (req, res) => {
     });
   }
 };
-
 
 const getUserByEmail = async (req, res) => {
   try {

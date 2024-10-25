@@ -27,9 +27,8 @@ const createTweet = async (req, res) => {
 
 const readTweet = async (req, res) => {
   try {
-
     const pageNo = req.query.page;
-    
+
     const response = await tweetService.readTweet(req.query.tweetId, pageNo);
     return res.status(200).json({
       data: response,

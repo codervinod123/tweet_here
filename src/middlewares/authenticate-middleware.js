@@ -9,8 +9,8 @@ const authenticateUser = (req, res, next) => {
     next();
   } catch (error) {
     return res.status(400).json({
-        error: error
-    })
+      error: error,
+    });
   }
 
   // passport.authenticate("jwt", (err, user) => {

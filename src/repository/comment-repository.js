@@ -6,18 +6,21 @@ export class CommentRepository extends CrudRepository {
     super(Comment);
   }
 
-  
   async getComments(postId, pageNo) {
     try {
       if (!postId) {
         const response = await Comment.find();
         return response;
       }
-      if(pageNo == 1){
-        const response = await Comment.find({commentable:postId}).limit(pageNo*1);
+      if (pageNo == 1) {
+        const response = await Comment.find({ commentable: postId }).limit(
+          pageNo * 1,
+        );
         return response;
-      }else{
-        const response = await Comment.find({commentable:postId}).limit(pageNo*3);
+      } else {
+        const response = await Comment.find({ commentable: postId }).limit(
+          pageNo * 3,
+        );
         return response;
       }
     } catch (error) {
@@ -25,5 +28,4 @@ export class CommentRepository extends CrudRepository {
       throw error;
     }
   }
-
 }

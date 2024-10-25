@@ -3,8 +3,6 @@ import { ClientError } from "../errorhandlers/client-error.js";
 import { StatusCodes } from "http-status-codes";
 import { MongoError } from "../errorhandlers/mongo-error.js";
 
-
-
 export class UserService {
   constructor() {
     this.userRepository = new UserRepository();
@@ -13,37 +11,23 @@ export class UserService {
   async createUser(email, password, name, profilePic) {
     try {
       const userData = { email, password, name, profilePic };
-      const res = await this.userRepository.createUser(userData);
-      const token = res.genJWT();
-      res.verifyToken(token);
-
-      const user={
-        name: res.name,
-        email: res.email,
-        bio: res.bio,
-        createdAt: res.createdAt,
-        followerList: res.followersList,
-        followingList: res.followingList,
-        location: res.location,
-        profilePic: res.profilePic,
-        _id: res._id,
-      }
-
-      return {user, token};
+      const user = await this.userRepository.createUser(userData);
+      const token = user.genJWT();
+      user.verifyToken(token);
+      return { user, token };
     } catch (error) {
-      
-      if(error.name == "MongoServerError"){
-          const mongoError=new MongoError(error);
-          throw mongoError;  
+      if (error.name == "MongoServerError") {
+        const mongoError = new MongoError(error);
+        throw mongoError;
       }
-      if(error.name == "ValidationError"){
-        const clientError=new ClientError(
+      if (error.name == "ValidationError") {
+        const clientError = new ClientError(
           error.name,
           error.message,
           StatusCodes.BAD_REQUEST,
-          error._message
+          error._message,
         );
-        throw clientError;  
+        throw clientError;
       }
 
       throw error;
@@ -55,56 +39,53 @@ export class UserService {
       // checking a user is present in db or not
       const res = await this.getByEmail(email);
       if (!res) {
-         const clientError=new ClientError(
+        const clientError = new ClientError(
           "AttributeNotFound",
           "Invalid Email id send",
           StatusCodes.NOT_FOUND,
-          "Please check your Email id , we have't this email in our record"
-         );
-         throw clientError;
+          "Please check your Email id , we have't this email in our record",
+        );
+        throw clientError;
       }
 
       // is user is present then will check for
       if (!res.comparePassword(password)) {
-        const clientError=new ClientError(
+        const clientError = new ClientError(
           "PassworNotMatched",
           "Invalid Password",
           StatusCodes.NOT_FOUND,
-          "Please check your Password , we have't this pass associated with any Email"
-         );
-         throw clientError;
+          "Please check your Password , we have't this pass associated with any Email",
+        );
+        throw clientError;
       }
 
       const token = res.genJWT();
       res.verifyToken(token);
 
-      const user={
-        name: res.name,
-        email: res.email,
-        bio: res.bio,
-        createdAt: res.createdAt,
-        followerList: res.followersList,
-        followingList: res.followingList,
-        location: res.location,
-        profilePic: res.profilePic,
+      const user = {
         _id: res._id,
-      }
-      
-      return {user, token};
+        email: res.email,
+        name: res.name,
+        followersList: res.followersList,
+        followingList: res.followingList,
+        createdAt: res.createdAt,
+        updatedAt: res.updatedAt,
+      };
+
+      return { user, token };
     } catch (error) {
       throw error;
     }
   }
 
-  async searchUser(searchText){
+  async searchUser(searchText) {
     try {
-        const response = await this.userRepository.searchUser(searchText);
-        return response;
+      const response = await this.userRepository.searchUser(searchText);
+      return response;
     } catch (error) {
-       return error;
+      return error;
     }
   }
-
 
   async updateUserProfilepic(userId, profilePic, name, bio, location) {
     try {
@@ -130,7 +111,6 @@ export class UserService {
       throw error;
     }
   }
-
 
   async getByEmail(userEmail) {
     try {
@@ -164,5 +144,4 @@ export class UserService {
       throw { error };
     }
   }
-
 }

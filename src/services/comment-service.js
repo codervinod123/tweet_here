@@ -42,8 +42,7 @@ export class CommentService {
       const response = await this.commentRepository.getComments(postId, pageNo);
       return response;
     } catch (error) {
-      console.log("Error has occured", error); 
+      console.log("Error has occured", error);
     }
   }
-
 }

@@ -20,13 +20,13 @@ const API_KEY = process.env.API_KEY;
 // eslint-disable-next-line
 const API_SECRET = process.env.API_SECRET;
 
-export { 
+export {
   PORT,
   MONGO_URL,
-  EMAIL_ID, 
-  EMAIL_PASSWORD, 
-  JWT_SECRET, 
-  CLOUD_NAME, 
-  API_KEY, 
-  API_SECRET
+  EMAIL_ID,
+  EMAIL_PASSWORD,
+  JWT_SECRET,
+  CLOUD_NAME,
+  API_KEY,
+  API_SECRET,
 };

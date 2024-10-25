@@ -3,7 +3,6 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { JWT_SECRET } from "../config/serverConfig.js";
 
-
 const userSchema = new mongoose.Schema(
   {
     email: {
@@ -14,10 +13,11 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
+      select: false,
     },
     name: {
       type: String,
-      required: true
+      required: true,
     },
     profilePic: {
       type: String,

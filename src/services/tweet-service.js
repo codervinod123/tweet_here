@@ -7,7 +7,6 @@ import { ClientError } from "../errorhandlers/client-error.js";
 import { StatusCodes } from "http-status-codes";
 
 export class TweetService {
- 
   constructor() {
     this.tweetRepository = new TweetRepository();
     this.hashtagRepository = new HashtagRepository();
@@ -16,19 +15,19 @@ export class TweetService {
   async createTweet(data) {
     try {
       const content = data.content;
-      if(!content) {
-         const clientError=new ClientError(
+      if (!content) {
+        const clientError = new ClientError(
           "ContentNotProvided",
           "Content Not Provided",
           StatusCodes.BAD_REQUEST,
-          "Please provide atleast Content or media"
-         );
-         throw clientError;
+          "Please provide atleast Content or media",
+        );
+        throw clientError;
       }
 
       let tags;
-      if(content){
-        tags=content.match(/#[a-zA-Z0-9_]+/g);
+      if (content) {
+        tags = content.match(/#[a-zA-Z0-9_]+/g);
       }
       const tweet = await this.tweetRepository.createEntry(data);
 
@@ -50,8 +49,8 @@ export class TweetService {
       }
       return tweet;
     } catch (error) {
-      if(error.name == "ValidationError"){
-        const validationError=new ValidationError(error);
+      if (error.name == "ValidationError") {
+        const validationError = new ValidationError(error);
         throw validationError;
       }
       throw error;
@@ -86,5 +85,4 @@ export class TweetService {
       throw { error };
     }
   }
-  
 }

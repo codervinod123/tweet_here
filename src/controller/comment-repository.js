@@ -25,13 +25,12 @@ const createComment = async (req, res) => {
   }
 };
 
-const getComments= async(req, res)=> {
-
-  const pageNo=req.query.page;
+const getComments = async (req, res) => {
+  const pageNo = req.query.page;
   try {
     const response = await commentService.readComments(
       req.headers.postid,
-      pageNo 
+      pageNo,
     );
     return res.status(200).json({
       response: response,
@@ -46,6 +45,6 @@ const getComments= async(req, res)=> {
       Message: "Comment can not fetched Successfully",
     });
   }
-}
+};
 
 export { createComment, getComments };

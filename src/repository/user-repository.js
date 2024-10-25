@@ -17,8 +17,10 @@ export class UserRepository extends CrudRepository {
 
   async searchUser(searchText) {
     try {
-      if(searchText){
-        const response = await User.find({name: { $regex: new RegExp('^' + searchText.toLowerCase(), 'i') }});
+      if (searchText) {
+        const response = await User.find({
+          name: { $regex: new RegExp("^" + searchText.toLowerCase(), "i") },
+        });
         return response;
       }
       const response = await User.find(searchText);
@@ -30,23 +32,23 @@ export class UserRepository extends CrudRepository {
 
   async getByEmail(email) {
     try {
-      const user = await User.findOne({ email: email });
+      const user = await User.findOne({ email: email }).select("+password");
       return user;
     } catch (error) {
       console.log("Error has occured while finding user");
-      throw { error };
+      throw error;
     }
   }
 
   async updateProfilePic(userId, profilePic, name, bio, location) {
     try {
-      await User.findByIdAndUpdate(userId, {
+      const user = await User.findByIdAndUpdate(userId, {
         profilePic: profilePic,
         name: name,
         bio: bio,
         location: location,
       });
-      return true;
+      return user;
     } catch (error) {
       console.log("Error has occured while finding user");
       throw { error };

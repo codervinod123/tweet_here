@@ -1,7 +1,6 @@
 import express from "express";
 import { multerUpload } from "../../middlewares/multer-middleware.js";
 import { authValidator } from "../../middlewares/authValidator-middleware.js";
-import welcomeMailSender from "../../middlewares/email-sender-middleware.js";
 import { authenticateUser } from "../../middlewares/authenticate-middleware.js";
 
 const userRouter = express.Router();
@@ -13,7 +12,7 @@ import {
   getUserByEmail,
   updateProfilePic,
   follow,
-  searchUser
+  searchUser,
 } from "../../controller/index.js";
 
 // Endpoints related to User welcomeMailSender
@@ -21,7 +20,12 @@ userRouter.post("/signup", createUser);
 userRouter.post("/signin", authValidator, loginUser);
 userRouter.get("/", readUser);
 userRouter.delete("/:userId", removeUser);
-userRouter.post("/updateprofile", authenticateUser, multerUpload, updateProfilePic);
+userRouter.post(
+  "/updateprofile",
+  authenticateUser,
+  multerUpload,
+  updateProfilePic,
+);
 userRouter.post("/follow", authenticateUser, follow);
 userRouter.get("/search", searchUser);
 
