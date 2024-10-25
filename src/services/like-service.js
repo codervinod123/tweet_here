@@ -22,7 +22,6 @@ export class LikeService {
         await likable.likes.pull(isExist.id);
         likable.save();
         await this.likeRepository.removeEntry(isExist.id);
-        await isExist.remove();
         return false;
       } else {
         const newLike = await this.likeRepository.createEntry({
