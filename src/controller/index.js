@@ -12,6 +12,7 @@ import {
   searchUser,
 } from "./user-controller.js";
 import { createComment, getComments } from "./comment-repository.js";
+import { addStories, readStory } from "./story-controller.js";
 
 export {
   createUser,
@@ -30,4 +31,6 @@ export {
   searchTrending,
   allTrending,
   follow,
+  addStories,
+  readStory,
 };

@@ -42,12 +42,16 @@ export class UserRepository extends CrudRepository {
 
   async updateProfilePic(userId, profilePic, name, bio, location) {
     try {
-      const user = await User.findByIdAndUpdate(userId, {
-        profilePic: profilePic,
-        name: name,
-        bio: bio,
-        location: location,
-      },{ new: true });
+      const user = await User.findByIdAndUpdate(
+        userId,
+        {
+          profilePic: profilePic,
+          name: name,
+          bio: bio,
+          location: location,
+        },
+        { new: true },
+      );
       return user;
     } catch (error) {
       console.log("Error has occured while finding user");
