@@ -30,8 +30,6 @@ class StoryService {
  
       const storyNeedToDeleted = new Date();
       storyNeedToDeleted.setDate(storyNeedToDeleted.getDate() - 1);
-      console.log(storyNeedToDeleted);
-
       const response=await this.storyRepository.clearStory(storyNeedToDeleted);
 
       // response.map((res)=>{

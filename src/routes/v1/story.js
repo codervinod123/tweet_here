@@ -13,10 +13,8 @@ storyRouter.get("/", readStory);
 storyRouter.delete("/", clearStory);
 
 
-cron.schedule('*/5 * * * * *', async () => {
-    const response=await clearStory();
-    console.log(response);
-   console.log("XXXXXXXX");
+cron.schedule('*/30 * * * *', async () => {
+   await clearStory();
 });
   
 
