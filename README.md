@@ -32,3 +32,5 @@ Json webtoken has 3 parts (divided through Dot)
 
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2Y2Q1MmNkNzc0NmVjNmI4MGRmYTA4NCIsImVtYWlsIjoic2Frc2hpQGdtYWlsLmNvbSIsImlhdCI6MTcyNDczNjkzMywiZXhwIjoxNzI0NzQwNTMzfQ.
 8r7nKRcUi0cOnFa0ENE3Y_OV6hnhjKE55cuw1nelWfg
+
+[MIT License](LICENSE)
