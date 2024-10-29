@@ -44,4 +44,22 @@ const readStory = async (req, res) => {
   }
 };
 
-export { addStories, readStory };
+
+const clearStory = async (req, res) => {
+    try {
+      const response = await storyService.clearStory();
+      return res.status(200).json({
+        data: response,
+        scuccess: true,
+        Message: "Story Cleared Successfully",
+      });
+    } catch (error) {
+      return res.status(500).json({
+        scuccess: false,
+        error: { error },
+        Message: "Story can not clear Successfully",
+      });
+    }
+  };
+
+export { addStories, readStory , clearStory};

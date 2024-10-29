@@ -24,5 +24,33 @@ class StoryService {
       throw error;
     }
   }
+
+  async clearStory() {
+    try {
+ 
+      const storyNeedToDeleted = new Date();
+      storyNeedToDeleted.setDate(storyNeedToDeleted.getDate() - 1);
+      console.log(storyNeedToDeleted);
+
+      const response=await this.storyRepository.clearStory(storyNeedToDeleted);
+
+      // response.map((res)=>{
+      //    if(res.createdAt < storyNeedToDeleted){
+      //     console.log("Need to delete");
+      //    }else{
+      //     console.log("Can not delete right now");
+      //    }
+      // })
+
+
+      
+
+      return response;
+    } catch (error) {
+      console.log("can not get all story", error);
+      throw error;
+    }
+  }
+
 }
 export { StoryService };
