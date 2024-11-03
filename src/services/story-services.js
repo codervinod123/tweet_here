@@ -27,22 +27,10 @@ class StoryService {
 
   async clearStory() {
     try {
- 
-      const storyNeedToDeleted = new Date();
-      storyNeedToDeleted.setDate(storyNeedToDeleted.getDate() - 1);
-      const response=await this.storyRepository.clearStory(storyNeedToDeleted);
-
-      // response.map((res)=>{
-      //    if(res.createdAt < storyNeedToDeleted){
-      //     console.log("Need to delete");
-      //    }else{
-      //     console.log("Can not delete right now");
-      //    }
-      // })
-
-
-      
-
+      const oneDayBackTime = new Date().getTime();
+      const timeWhenTodelete = oneDayBackTime - 1000*60*60*24;
+      const deleteTime=new Date(timeWhenTodelete).toISOString().replace('Z', '+00:00');   
+      const response=await this.storyRepository.clearStory(deleteTime);    
       return response;
     } catch (error) {
       console.log("can not get all story", error);
