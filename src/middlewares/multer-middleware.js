@@ -9,6 +9,8 @@ const storage = multer.diskStorage({
   },
 }); // store image in memory
 
+
+
 const multerUpload = multer({ storage: storage }).single("file");
 
 export { multerUpload };

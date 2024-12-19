@@ -7,9 +7,6 @@ import passport from "passport";
 import { passportAuth } from "./config/jwt-auth-config.js";
 import cors from "cors";
 
-
-
-
 const startServer = () => {
   const app = express();
 

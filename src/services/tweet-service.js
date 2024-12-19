@@ -57,10 +57,10 @@ export class TweetService {
     }
   }
 
-  async readTweet(tweetId, pageNo) {
+  async readTweet(tweetId, pageNo, userid) {
     try {
       if (!tweetId) {
-        const response = await this.tweetRepository.getBulkTweet(pageNo);
+        const response = await this.tweetRepository.getBulkTweet(pageNo, userid);
         return response;
       }
       const response = await Tweet.findById(tweetId);

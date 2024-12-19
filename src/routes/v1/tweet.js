@@ -12,8 +12,8 @@ import { authenticateUser } from "../../middlewares/authenticate-middleware.js";
 
 const tweetRouter = express.Router();
 
-tweetRouter.post("/tweet", multerUpload, createTweet);
-tweetRouter.get("/", readTweet);
+tweetRouter.post("/tweet", authenticateUser, multerUpload, createTweet);
+tweetRouter.get("/",authenticateUser, readTweet);
 tweetRouter.delete("/tweet", deleteTweet);
 tweetRouter.post("/like", authenticateUser, like);
 tweetRouter.post("/comment", authenticateUser, createComment);

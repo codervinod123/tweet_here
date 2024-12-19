@@ -8,6 +8,7 @@ const createTweet = async (req, res) => {
     if (req.file) {
       const imageURI = await uploadOnCloudinary(req.file.path);
       req.body = { ...req.body, media: imageURI.url };
+      req.body = { ...req.body, author: req.headers.userid };
     }
 
     const response = await tweetService.createTweet(req.body);
@@ -28,8 +29,7 @@ const createTweet = async (req, res) => {
 const readTweet = async (req, res) => {
   try {
     const pageNo = req.query.page;
-
-    const response = await tweetService.readTweet(req.query.tweetId, pageNo);
+    const response = await tweetService.readTweet(req.query.tweetId, pageNo, req.headers.userid);
     return res.status(200).json({
       data: response,
       Message: "Tweet has fetched Successfully",

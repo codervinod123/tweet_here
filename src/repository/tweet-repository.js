@@ -6,12 +6,13 @@ export class TweetRepository extends CrudRepository {
     super(Tweet);
   }
 
-  async getBulkTweet(pageNo) {
+  async getBulkTweet(pageNo, userid) {
     try {
       const response = await this.model
-        .find()
+        .find({ author: { $ne: userid } })
         .sort({ createdAt: -1 })
-        .limit(pageNo * 10);
+        .limit(pageNo * 10)
+        .populate({path: "author"});
       return response;
     } catch (error) {
       console.log("Error occured while fetching entry xxxxxxxx");
