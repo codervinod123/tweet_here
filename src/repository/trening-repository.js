@@ -1,6 +1,8 @@
+import { populate } from "dotenv";
 import { Hashtag } from "../models/index.js";
 
 export class TrendingRepository {
+ 
   async searchTrending(trend) {
     try {
       let response = await Hashtag.find({
@@ -24,6 +26,14 @@ export class TrendingRepository {
         {
           $sort: { tweetCount: -1 },
         },
+        {
+            $lookup: {
+                from: "tweets", 
+                localField: "tweets", 
+                foreignField: "_id", 
+                as: "tweetDetails", 
+            },
+        },
       ]).limit(pageNo * 5);
       return response;
     } catch (error) {
@@ -31,4 +41,21 @@ export class TrendingRepository {
       throw { error };
     }
   }
+
 }
+
+
+
+
+
+
+
+
+// {
+//   $lookup: {
+//       from: "tweets", 
+//       localField: "tweets", 
+//       foreignField: "_id", 
+//       as: "tweetDetails", 
+//   },
+// },

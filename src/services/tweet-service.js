@@ -71,6 +71,7 @@ export class TweetService {
     }
   }
 
+
   async deleteTweet(tweetId) {
     try {
       // deleting all the likes also from like table when user delete tweet

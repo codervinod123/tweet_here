@@ -44,6 +44,7 @@ const readTweet = async (req, res) => {
   }
 };
 
+
 const deleteTweet = async (req, res) => {
   try {
     const response = await tweetService.deleteTweet(req.query.tweetId);
