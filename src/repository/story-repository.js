@@ -13,7 +13,7 @@ class StoryRepository {
 
   async readStory() {
     try {
-      const response = await Story.find().sort({createdAt:-1});
+      const response = await Story.find().populate({path: 'author', select: 'name'}).sort({createdAt:-1});
       return response;
     } catch (error) {
       console.log("can not get all story", error);
