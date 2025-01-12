@@ -68,6 +68,9 @@ export class UserService {
         name: res.name,
         followersList: res.followersList,
         followingList: res.followingList,
+        bio: res.bio,
+        location: res.location,
+        profilePic: res.profilePic,
         createdAt: res.createdAt,
         updatedAt: res.updatedAt,
       };

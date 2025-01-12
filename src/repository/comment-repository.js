@@ -13,14 +13,14 @@ export class CommentRepository extends CrudRepository {
         return response;
       }
       if (pageNo == 1) {
-        const response = await Comment.find({ commentable: postId }).limit(
+        const response = await Comment.find({ commentable: postId }).populate({path:"user"}).limit(
           pageNo * 1,
-        );
+        ).sort({createdAt: -1});
         return response;
       } else {
-        const response = await Comment.find({ commentable: postId }).limit(
+        const response = await Comment.find({ commentable: postId }).populate({path:"user"}).limit(
           pageNo * 3,
-        );
+        ).sort({createdAt: -1});
         return response;
       }
     } catch (error) {
