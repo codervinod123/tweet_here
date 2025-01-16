@@ -1,6 +1,6 @@
 import { like } from "./like-repository.js";
 import { searchTrending, allTrending } from "./trending-repository.js";
-import { createTweet, readTweet, deleteTweet } from "./tweet-controller.js";
+import { createTweet, readTweet, deleteTweet, getTrendingTweet } from "./tweet-controller.js";
 import {
   createUser,
   readUser,
@@ -26,6 +26,7 @@ export {
   like,
   readTweet,
   deleteTweet,
+  getTrendingTweet,
   createComment,
   getComments,
   searchTrending,

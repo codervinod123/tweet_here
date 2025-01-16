@@ -1,5 +1,6 @@
 import { TweetService } from "../services/index.js";
 import { uploadOnCloudinary } from "../utils/upload-cloudinary.js";
+import Tweet from "../models/tweet-model.js";
 
 const tweetService = new TweetService();
 
@@ -44,7 +45,6 @@ const readTweet = async (req, res) => {
   }
 };
 
-
 const deleteTweet = async (req, res) => {
   try {
     const response = await tweetService.deleteTweet(req.query.tweetId);
@@ -64,4 +64,24 @@ const deleteTweet = async (req, res) => {
   }
 };
 
-export { createTweet, readTweet, deleteTweet };
+const getTrendingTweet = async (req, res) => {
+  try {
+    const ids = req.query.ids.split(",");
+    const response = await Tweet.find({ _id: { $in: ids } }).populate({path:"author"});
+    return res.status(200).json({
+      data: response,
+      Message: "trending Tweet fetched Successfully",
+      success: true,
+      error: {},
+    });
+  } catch (error) {
+    return res.status(500).json({
+      data: {},
+      Message: "trending Tweet can not get Successfully",
+      cuccess: false,
+      error: { error },
+    });
+  }
+};
+
+export { createTweet, readTweet, deleteTweet, getTrendingTweet };

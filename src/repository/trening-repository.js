@@ -26,14 +26,14 @@ export class TrendingRepository {
         {
           $sort: { tweetCount: -1 },
         },
-        {
-            $lookup: {
-                from: "tweets", 
-                localField: "tweets", 
-                foreignField: "_id", 
-                as: "tweetDetails", 
-            },
-        },
+        // {
+        //     $lookup: {
+        //         from: "tweets", 
+        //         localField: "tweets", 
+        //         foreignField: "_id", 
+        //         as: "tweetDetails", 
+        //     },
+        // },
       ]).limit(pageNo * 5);
       return response;
     } catch (error) {
