@@ -13,6 +13,7 @@ import {
   updateProfilePic,
   follow,
   searchUser,
+  getFriends
 } from "../../controller/index.js";
 
 // Endpoints related to User welcomeMailSender
@@ -20,6 +21,8 @@ userRouter.post("/signup", createUser);
 userRouter.post("/signin", authValidator, loginUser);
 userRouter.get("/", authenticateUser, readUser);
 userRouter.delete("/:userId", removeUser);
+userRouter.get("/friends", getFriends);
+
 
 userRouter.post(
   "/updateprofile",

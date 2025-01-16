@@ -86,5 +86,16 @@ export class UserRepository extends CrudRepository {
     }
   }
 
+  async getFriends(ids) {
+    try {  
+      const id = ids.split(",");              
+      const  response = await User.find({ _id: { $in: id } });
+      return response;
+    } catch (error) {
+      console.log("Error has occured while finding user");
+      throw { error };
+    }
+  }
+
 
 }

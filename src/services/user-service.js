@@ -147,4 +147,17 @@ export class UserService {
       throw { error };
     }
   }
+
+
+  async getFriends(ids) {
+    console.log("ID#", ids);
+    try {
+      const response = await this.userRepository.getFriends(ids);
+      return response;
+    } catch (error) {
+      console.log("Error has  occured while fetching user");
+      throw { error };
+    }
+  }
+
 }

@@ -10,6 +10,7 @@ import {
   updateProfilePic,
   follow,
   searchUser,
+  getFriends
 } from "./user-controller.js";
 import { createComment, getComments } from "./comment-repository.js";
 import { addStories, readStory, clearStory } from "./story-controller.js";
@@ -34,5 +35,6 @@ export {
   follow,
   addStories,
   readStory,
-  clearStory
+  clearStory,
+  getFriends
 };

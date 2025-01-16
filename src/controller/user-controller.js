@@ -166,6 +166,26 @@ const follow = async (req, res) => {
   }
 };
 
+const getFriends = async (req, res) => {
+  try {
+    
+    const response = await userService.getFriends(req.query.ids);
+    return res.status(200).json({
+      data: response,
+      Message: "find all friend successfully",
+      scuccess: true,
+      error: {},
+    });
+  } catch (error) {
+    return res.status(500).json({
+      data: null,
+      Message: "Unable to find all friends",
+      scuccess: false,
+      error: error,
+    });
+  }
+};
+
 export {
   createUser,
   readUser,
@@ -175,4 +195,5 @@ export {
   getUserByEmail,
   updateProfilePic,
   follow,
+  getFriends
 };
