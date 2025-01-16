@@ -105,9 +105,9 @@ export class UserService {
     }
   }
 
-  async readUser(userId) {
+  async readUser(userid) {
     try {
-      const response = await this.userRepository.readEntry(userId);
+      const response = await this.userRepository.getUser(userid);
       return response;
     } catch (error) {
       console.log("ERRROR ###3", error.reason);

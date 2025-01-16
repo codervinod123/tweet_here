@@ -6,6 +6,16 @@ export class UserRepository extends CrudRepository {
     super(User);
   }
 
+  async getUser(userid) {
+    try {
+      const response = await User.find({ _id: { $ne: userid } })
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+
   async createUser(data) {
     try {
       const response = await User.create(data);
@@ -75,4 +85,6 @@ export class UserRepository extends CrudRepository {
       throw { error };
     }
   }
+
+
 }

@@ -18,15 +18,18 @@ import {
 // Endpoints related to User welcomeMailSender
 userRouter.post("/signup", createUser);
 userRouter.post("/signin", authValidator, loginUser);
-userRouter.get("/", readUser);
+userRouter.get("/", authenticateUser, readUser);
 userRouter.delete("/:userId", removeUser);
+
 userRouter.post(
   "/updateprofile",
   authenticateUser,
   multerUpload,
   updateProfilePic,
 );
+
 userRouter.post("/follow", authenticateUser, follow);
+
 userRouter.get("/search", searchUser);
 
 // below is not is use

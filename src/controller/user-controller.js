@@ -91,7 +91,7 @@ const updateProfilePic = async (req, res) => {
 
 const readUser = async (req, res) => {
   try {
-    const response = await userService.readUser(req.query.userId);
+    const response = await userService.readUser(req.headers.userid);
     return res.status(200).json({
       data: response,
       Message: "User fetched Successfully",
@@ -100,7 +100,7 @@ const readUser = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       Message: "Tweet can not fetched Successfully",
-      cuccess: false,
+      scuccess: false,
       error: { error },
     });
   }
