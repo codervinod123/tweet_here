@@ -29,7 +29,7 @@ export class TweetService {
       if (content) {
         tags = content.match(/#[a-zA-Z0-9_]+/g);
       }
-      const tweet = await this.tweetRepository.createEntry(data);
+      const tweet = await this.tweetRepository.createTweet(data);
 
       if (tags) {
         tags = tags.map((tag) => tag.substring(1));
