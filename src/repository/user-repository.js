@@ -15,6 +15,25 @@ export class UserRepository extends CrudRepository {
     }
   }
 
+  async currentLoginUser(userid) {
+    try {
+      const response = await User.findById(userid);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+
+  async getLoginUser(userid) {
+    try {
+      const response = await User.findById(userid);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
 
   async createUser(data) {
     try {
@@ -86,16 +105,14 @@ export class UserRepository extends CrudRepository {
     }
   }
 
-  async getFriends(ids) {
-    try {  
-      const id = ids.split(",");              
-      const  response = await User.find({ _id: { $in: id } });
+  async getFriends(id) {
+    try {          
+      const  response = await User.findById(id).select("followingList").populate([{ path: "followersList" }, { path: "followingList" }]);
       return response;
     } catch (error) {
       console.log("Error has occured while finding user");
       throw { error };
     }
   }
-
 
 }

@@ -6,6 +6,7 @@ import {
   readUser,
   removeUser,
   loginUser,
+  currentLoginUser,
   getUserByEmail,
   updateProfilePic,
   follow,
@@ -18,6 +19,7 @@ import { addStories, readStory, clearStory } from "./story-controller.js";
 export {
   createUser,
   loginUser,
+  currentLoginUser,
   searchUser,
   readUser,
   removeUser,

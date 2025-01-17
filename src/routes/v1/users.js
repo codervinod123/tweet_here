@@ -9,6 +9,7 @@ import {
   loginUser,
   readUser,
   removeUser,
+  currentLoginUser,
   getUserByEmail,
   updateProfilePic,
   follow,
@@ -20,6 +21,7 @@ import {
 userRouter.post("/signup", createUser);
 userRouter.post("/signin", authValidator, loginUser);
 userRouter.get("/", authenticateUser, readUser);
+userRouter.get("/currentloginuser", authenticateUser, currentLoginUser);
 userRouter.delete("/:userId", removeUser);
 userRouter.get("/friends", getFriends);
 

@@ -44,6 +44,23 @@ const loginUser = async (req, res) => {
   }
 };
 
+const currentLoginUser = async (req, res) => {
+  try {
+    const response = await userService.currentLoginUser(req.headers.userid);
+    return res.status(200).json({
+      data: response,
+      Message: "User fetched Successfully",
+      scuccess: true,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      Message: "Tweet can not fetched Successfully",
+      scuccess: false,
+      error: { error },
+    });
+  }
+};
+
 const searchUser = async (req, res) => {
   try {
     const searchText = req.query.searchquery;
@@ -105,6 +122,26 @@ const readUser = async (req, res) => {
     });
   }
 };
+
+
+// const loginUser = async (req, res) => {
+//   try {
+//     const response = await userService.loginUser(req.headers.userid);
+//     return res.status(200).json({
+//       data: response,
+//       Message: "User fetched Successfully",
+//       scuccess: true,
+//     });
+//   } catch (error) {
+//     return res.status(500).json({
+//       Message: "Tweet can not fetched Successfully",
+//       scuccess: false,
+//       error: { error },
+//     });
+//   }
+// };
+
+
 
 const removeUser = async (req, res) => {
   try {
@@ -168,8 +205,7 @@ const follow = async (req, res) => {
 
 const getFriends = async (req, res) => {
   try {
-    
-    const response = await userService.getFriends(req.query.ids);
+    const response = await userService.getFriends(req.query.user);
     return res.status(200).json({
       data: response,
       Message: "find all friend successfully",
@@ -192,6 +228,7 @@ export {
   searchUser,
   removeUser,
   loginUser,
+  currentLoginUser,
   getUserByEmail,
   updateProfilePic,
   follow,

@@ -115,6 +115,16 @@ export class UserService {
     }
   }
 
+  async currentLoginUser(userid) {
+    try {
+      const response = await this.userRepository.currentLoginUser(userid);
+      return response;
+    } catch (error) {
+      console.log("ERRROR ###3", error.reason);
+      throw error;
+    }
+  }
+
   async getByEmail(userEmail) {
     try {
       const response = await this.userRepository.getByEmail(userEmail);
@@ -149,10 +159,9 @@ export class UserService {
   }
 
 
-  async getFriends(ids) {
-    console.log("ID#", ids);
+  async getFriends(id) {
     try {
-      const response = await this.userRepository.getFriends(ids);
+      const response = await this.userRepository.getFriends(id);
       return response;
     } catch (error) {
       console.log("Error has  occured while fetching user");
